@@ -39,7 +39,7 @@ class MyWidget extends StatelessWidget {
           ],
         ),
         body: Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.only(left: 20, right: 20),
             child: Form(
               key: _formKey,
               child: Column(
