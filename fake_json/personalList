@@ -1,0 +1,20 @@
+{
+	"personal1": {
+		"firstname": "Neymar",
+		"lastname": "Jr",
+		"avaliation": "4.5",
+		"profilePicture": "profile1.png"
+	},
+	"personal2": {
+		"firstname": "Cristiano",
+		"lastname": "Ronaldo",
+		"avaliation": "5.0",
+		"profilePicture": "profile2.png"
+	},
+	"personal3": {
+		"firstname": "Lionel",
+		"lastname": "Messi",
+		"avaliation": "4.8",
+		"profilePicture": "profle3.png"
+	}
+}
