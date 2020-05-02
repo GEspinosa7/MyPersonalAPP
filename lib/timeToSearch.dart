@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
+import 'searchPersonal.dart';
+
 final Color darkBlue = Color.fromARGB(255, 18, 32, 47);
 
 void main() {
-  runApp(MyApp());
+  runApp(SearchStep());
 }
 
-class MyApp extends StatelessWidget {
+class SearchStep extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -41,13 +43,14 @@ class MyWidget extends StatelessWidget {
             color: Colors.green,
             textColor: Colors.white,
             padding: EdgeInsets.all(10.0),
-            onPressed: () {
-/**/
-            },
-            child: Text(
+                        child: Text(
               "Procurar",
               style: TextStyle(fontSize: 20.0),
-            )),
+            ),
+                        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) {
+                          return PersonalListPage();
+                        }))
+),
       ],
     );
   }

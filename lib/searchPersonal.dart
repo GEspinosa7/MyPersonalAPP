@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 final Color darkBlue = Color.fromARGB(255, 18, 32, 47);
 
 void main() {
-  runApp(MyApp());
+  runApp(PersonalListPage());
 }
 
-class MyApp extends StatelessWidget {
+class PersonalListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

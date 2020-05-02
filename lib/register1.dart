@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
+import 'register2.dart';
+
 final Color darkBlue = Color.fromARGB(255, 18, 32, 47);
 
 void main() {
-  runApp(MyApp());
+  runApp(RegisterStepOne());
 }
 
-class MyApp extends StatelessWidget {
+class RegisterStepOne extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -95,7 +97,9 @@ class MyWidget extends StatelessWidget {
                             // Validate will return true if the form is valid, or false if
                             // the form is invalid.
                             if (_formKey.currentState.validate()) {
-                              // Process data.
+                                                               Navigator.push(context, MaterialPageRoute(builder: (context) {
+                          return RegisterStepTwo();
+                        })); // Process data.
                             }
                           },
                           child: Text(
