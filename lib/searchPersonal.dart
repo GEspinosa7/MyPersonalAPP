@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 
 final Color darkBlue = Color.fromARGB(255, 18, 32, 47);
 
-void main() {
-  runApp(PersonalListPage());
-}
-
 class PersonalListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -13,6 +9,11 @@ class PersonalListPage extends StatelessWidget {
       theme: ThemeData.dark().copyWith(scaffoldBackgroundColor: darkBlue),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+          appBar: AppBar(
+          title: Text('Personais Cadastrados', textAlign: TextAlign.center),
+          centerTitle: false,
+          backgroundColor: Colors.transparent,
+        ),
         body: Center(
           child: MyWidget(),
         ),
@@ -27,10 +28,8 @@ class MyWidget extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
-          "Personais Cadastrados",
-          style: TextStyle(fontSize: 20.0),
-        ),
+        personal(),
+        personal(),
         personal(),
         personal(),
         personal(),
@@ -59,7 +58,15 @@ class MyWidget extends StatelessWidget {
                 borderRadius:
                     const BorderRadius.all(const Radius.circular(100)),
               )),
-              Text('Nome')
+              Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text ('Nome '),
+                    Text ('Sobrenome')
+                  ],
+                )
+              )
             ]),
             Column(
                 mainAxisAlignment: MainAxisAlignment.center,

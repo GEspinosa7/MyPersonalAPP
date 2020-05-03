@@ -4,9 +4,6 @@ import 'register2.dart';
 
 final Color darkBlue = Color.fromARGB(255, 18, 32, 47);
 
-void main() {
-  runApp(RegisterStepOne());
-}
 
 class RegisterStepOne extends StatelessWidget {
   @override
@@ -15,6 +12,7 @@ class RegisterStepOne extends StatelessWidget {
       theme: ThemeData.dark().copyWith(scaffoldBackgroundColor: darkBlue),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        resizeToAvoidBottomPadding: false,
         body: Center(
           child: MyWidget(),
         ),
@@ -31,24 +29,26 @@ class MyWidget extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
+          title: Text('Cadastrando perfil', textAlign: TextAlign.center),
+          centerTitle: false,
           backgroundColor: Colors.transparent,
         ),
         body: Padding(
-            padding: const EdgeInsets.all(30.0),
+            padding: const EdgeInsets.only(right: 30, left: 30),
             child: Form(
               key: _formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text(
-                    "Vamos cadastrar seu perfil!",
-                    style: TextStyle(fontSize: 18.0),
-                    textAlign: TextAlign.center
-                  ),
+                  // Text(
+                  //   "Vamos cadastrar seu perfil!",
+                  //   style: TextStyle(fontSize: 18.0),
+                  //   textAlign: TextAlign.center
+                  // ),
                   Text(
                     "Informe seus dados",
-                    style: TextStyle(fontSize: 13.0),
+                    style: TextStyle(fontSize: 18.0),
                     textAlign: TextAlign.center
                   ),
                   TextFormField(

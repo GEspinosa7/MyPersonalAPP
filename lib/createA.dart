@@ -15,6 +15,7 @@ class CreateAcPage extends StatelessWidget {
       theme: ThemeData.dark().copyWith(scaffoldBackgroundColor: darkBlue),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        resizeToAvoidBottomPadding: false,
         body: Center(
           child: MyWidget(),
         ),
@@ -31,29 +32,23 @@ class MyWidget extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
+          title: Text('Criando sua conta', textAlign: TextAlign.center),
+          centerTitle: false,
           backgroundColor: Colors.transparent,
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed: () {
-                /**/
-              },
-            ),
-          ],
         ),
         body: Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.only(right: 30, left: 30),
             child: Form(
               key: _formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text(
-                    "Criando sua conta",
-                    style: TextStyle(fontSize: 20.0),
-                    textAlign: TextAlign.center
-                  ),
+                  // Text(
+                  //   "Criando sua conta",
+                  //   style: TextStyle(fontSize: 20.0),
+                  //   textAlign: TextAlign.center
+                  // ),
                   TextFormField(
                     autofocus: true,
                     decoration: const InputDecoration(
@@ -68,6 +63,7 @@ class MyWidget extends StatelessWidget {
                   ),
                   TextFormField(
                     autofocus: true,
+                    obscureText: true,
                     decoration: const InputDecoration(
                       hintText: 'Informe uma senha',
                     ),

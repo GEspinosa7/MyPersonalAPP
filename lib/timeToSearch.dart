@@ -4,10 +4,6 @@ import 'searchPersonal.dart';
 
 final Color darkBlue = Color.fromARGB(255, 18, 32, 47);
 
-void main() {
-  runApp(SearchStep());
-}
-
 class SearchStep extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

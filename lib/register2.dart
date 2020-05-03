@@ -4,10 +4,6 @@ import 'timeToSearch.dart';
 
 final Color darkBlue = Color.fromARGB(255, 18, 32, 47);
 
-void main() {
-  runApp(RegisterStepTwo());
-}
-
 class RegisterStepTwo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -29,35 +25,20 @@ class MyWidget extends StatelessWidget {
       theme: ThemeData.dark().copyWith(scaffoldBackgroundColor: darkBlue),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        resizeToAvoidBottomPadding: false,
         appBar: AppBar(
+          title: Text('Finalizando perfil', textAlign: TextAlign.center),
+          centerTitle: false,
           backgroundColor: Colors.transparent,
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed: () {
-                /**/
-              },
-            ),
-          ],
         ),
         body: Padding(
-            padding: const EdgeInsets.only(left: 20, right: 20),
+            padding: const EdgeInsets.only(right: 30, left: 30),
             child: Form(
               key: _formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text(
-                    "Finalizando",
-                    style: TextStyle(fontSize: 18.0),
-                    textAlign: TextAlign.center
-                  ),
-                  Text(
-                    "Atenção nesses dados, pois eles serão importantes para ajudar o personal a criar seu treino",
-                    style: TextStyle(fontSize: 13.0),
-                    textAlign: TextAlign.center
-                  ),
                   TextFormField(
                     autofocus: true,
                     decoration: const InputDecoration(

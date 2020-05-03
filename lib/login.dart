@@ -4,9 +4,6 @@ import 'searchPersonal.dart';
 
 final Color darkBlue = Color.fromARGB(255, 18, 32, 47);
 
-void main() {
-  runApp(LoginPage());
-}
 
 class LoginPage extends StatelessWidget {
   @override
@@ -15,6 +12,7 @@ class LoginPage extends StatelessWidget {
       theme: ThemeData.dark().copyWith(scaffoldBackgroundColor: darkBlue),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        resizeToAvoidBottomPadding: false,
         body: Center(
           child: MyWidget(),
         ),
@@ -31,29 +29,26 @@ class MyWidget extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
+          title: Text('Seja bem-Vindo(a) de volta!', textAlign: TextAlign.center),
+          centerTitle: false,
           backgroundColor: Colors.transparent,
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed: () {
-                /**/
-              },
-            ),
-          ],
+          // actions: <Widget>[
+          //   IconButton(
+          //     icon: Icon(Icons.arrow_back),
+          //     onPressed: () {
+          //       Navigator.pop(context);
+          //     },
+          //   ),
+          // ],
         ),
         body: Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.only(right: 30, left: 30),
             child: Form(
               key: _formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text(
-                    "Seja bem-Vindo(a) de volta!",
-                    style: TextStyle(fontSize: 20.0),
-                    textAlign: TextAlign.center
-                  ),
                   TextFormField(
                     autofocus: true,
                     decoration: const InputDecoration(
@@ -68,6 +63,7 @@ class MyWidget extends StatelessWidget {
                   ),
                   TextFormField(
                     autofocus: true,
+                    obscureText: true,
                     decoration: const InputDecoration(
                       hintText: 'Informe sua senha',
                     ),
