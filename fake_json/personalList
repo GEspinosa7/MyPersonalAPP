@@ -1,20 +1,23 @@
 {
 	"personal1": {
+		"id": "1",
+		"profile_picture": "http://encurtador.com.br/lvyLZ",
 		"firstname": "Neymar",
 		"lastname": "Jr",
-		"avaliation": "4.5",
-		"profilePicture": "profile1.png"
+		"avaliation": "4.5"
 	},
 	"personal2": {
+		"id": "2",
+		"profile_picture": "http://encurtador.com.br/pBEMT",
 		"firstname": "Cristiano",
 		"lastname": "Ronaldo",
-		"avaliation": "5.0",
-		"profilePicture": "profile2.png"
+		"avaliation": "5.0"
 	},
 	"personal3": {
+		"id": "3",
+		"profile_picture": "http://encurtador.com.br/tzR26",
 		"firstname": "Lionel",
 		"lastname": "Messi",
-		"avaliation": "4.8",
-		"profilePicture": "profle3.png"
+		"avaliation": "4.8"
 	}
 }
