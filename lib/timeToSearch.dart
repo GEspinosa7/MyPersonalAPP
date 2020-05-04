@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'searchPersonal.dart';
+import 'searchTrainer.dart';
 
 final Color darkBlue = Color.fromARGB(255, 18, 32, 47);
 
@@ -30,7 +30,7 @@ class MyWidget extends StatelessWidget {
           height: 80,
           width: double.infinity,
           child: Text(
-            "Agora está na hora de procurar seu personal trainer",
+            "Agora está na hora de procurar seu trainer trainer",
             style: TextStyle(fontSize: 20.0),
             textAlign: TextAlign.center
           ),
@@ -44,7 +44,7 @@ class MyWidget extends StatelessWidget {
               style: TextStyle(fontSize: 20.0),
             ),
                         onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) {
-                          return PersonalListPage();
+                          return ListTrainer();
                         }))
 ),
       ],
