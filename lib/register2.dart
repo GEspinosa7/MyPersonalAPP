@@ -7,28 +7,10 @@ final Color darkBlue = Color.fromARGB(255, 18, 32, 47);
 class RegisterStepTwo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Center(
-          child: MyWidget(),
-        ),
-      ),
-    );
-  }
-}
-
-class MyWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData.dark().copyWith(scaffoldBackgroundColor: darkBlue),
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        resizeToAvoidBottomPadding: false,
+    return Scaffold(
         appBar: AppBar(
           title: Text('Finalizando perfil', textAlign: TextAlign.center),
-          centerTitle: false,
+          centerTitle: true,
           backgroundColor: Colors.transparent,
         ),
         body: Padding(
@@ -121,8 +103,7 @@ class MyWidget extends StatelessWidget {
                 ],
               ),
             )),
-      ),
-    );
+      );
   }
 }
 

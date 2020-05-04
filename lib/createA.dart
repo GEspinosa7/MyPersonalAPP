@@ -4,36 +4,14 @@ import 'register1.dart';
 
 final Color darkBlue = Color.fromARGB(255, 18, 32, 47);
 
-void main() {
-  runApp(CreateAcPage());
-}
 
 class CreateAcPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData.dark().copyWith(scaffoldBackgroundColor: darkBlue),
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        resizeToAvoidBottomPadding: false,
-        body: Center(
-          child: MyWidget(),
-        ),
-      ),
-    );
-  }
-}
-
-class MyWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData.dark().copyWith(scaffoldBackgroundColor: darkBlue),
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: Text('Criando sua conta', textAlign: TextAlign.center),
-          centerTitle: false,
+          centerTitle: true,
           backgroundColor: Colors.transparent,
         ),
         body: Padding(
@@ -96,8 +74,7 @@ class MyWidget extends StatelessWidget {
                 ],
               ),
             )),
-      ),
-    );
+      );
   }
 }
 

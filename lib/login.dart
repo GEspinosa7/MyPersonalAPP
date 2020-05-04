@@ -1,45 +1,17 @@
 import 'package:flutter/material.dart';
 
-import 'searchPersonal.dart';
+import 'searchTrainer.dart';
 
 final Color darkBlue = Color.fromARGB(255, 18, 32, 47);
-
 
 class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData.dark().copyWith(scaffoldBackgroundColor: darkBlue),
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        resizeToAvoidBottomPadding: false,
-        body: Center(
-          child: MyWidget(),
-        ),
-      ),
-    );
-  }
-}
-
-class MyWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData.dark().copyWith(scaffoldBackgroundColor: darkBlue),
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: Text('Seja bem-Vindo(a) de volta!', textAlign: TextAlign.center),
-          centerTitle: false,
+          centerTitle: true,
           backgroundColor: Colors.transparent,
-          // actions: <Widget>[
-          //   IconButton(
-          //     icon: Icon(Icons.arrow_back),
-          //     onPressed: () {
-          //       Navigator.pop(context);
-          //     },
-          //   ),
-          // ],
         ),
         body: Padding(
             padding: const EdgeInsets.only(right: 30, left: 30),
@@ -85,7 +57,7 @@ class MyWidget extends StatelessWidget {
                             // the form is invalid.
                             if (_formKey.currentState.validate()) {
                                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                          return PersonalListPage();
+                          return ListTrainer();
                         }));
                             }
                           },
@@ -96,8 +68,7 @@ class MyWidget extends StatelessWidget {
                 ],
               ),
             )),
-      ),
-    );
+      );
   }
 }
 
