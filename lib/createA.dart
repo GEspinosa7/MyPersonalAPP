@@ -1,11 +1,26 @@
 import 'package:flutter/material.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'register1.dart';
 
 final Color darkBlue = Color.fromARGB(255, 18, 32, 47);
 
+class CreateAcPage extends StatefulWidget {
+  @override
+  _CreateAcPageState createState() => _CreateAcPageState();  
+} 
 
-class CreateAcPage extends StatelessWidget {
+class _CreateAcPageState extends State<CreateAcPage> {
+  final _formKey = GlobalKey<FormState>();
+
+  var email = '';
+  var password = '';
+
+  saveUserData() async {
+    var sharedPreference = await SharedPreferences.getInstance();
+    sharedPreference.setString('user_email', email );
+    sharedPreference.setString('user_pass', password );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,22 +37,23 @@ class CreateAcPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  // Text(
-                  //   "Criando sua conta",
-                  //   style: TextStyle(fontSize: 20.0),
-                  //   textAlign: TextAlign.center
-                  // ),
                   TextFormField(
                     autofocus: true,
                     decoration: const InputDecoration(
                       hintText: 'Informe um email',
                     ),
+                    onSaved: (value) {
+                      setState(() {
+                        email = value;
+                      });
+                    },
                     validator: (value) {
                       if (value.isEmpty) {
                         return 'Por favor, precisamos de um email';
                       }
                       return null;
                     },
+
                   ),
                   TextFormField(
                     autofocus: true,
@@ -45,12 +61,18 @@ class CreateAcPage extends StatelessWidget {
                     decoration: const InputDecoration(
                       hintText: 'Informe uma senha',
                     ),
+                    onSaved: (value) {
+                      setState(() {
+                        password = value;
+                      });
+                    },
                     validator: (value) {
                       if (value.isEmpty) {
                         return 'Por favor, você precisa de uma senha';
                       }
                       return null;
                     },
+
                   ),
                   Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -59,10 +81,12 @@ class CreateAcPage extends StatelessWidget {
                           textColor: Colors.white,
                           padding: EdgeInsets.all(10.0),
                           onPressed: () {
-                            // Validate will return true if the form is valid, or false if
-                            // the form is invalid.
+
                             if (_formKey.currentState.validate()) {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                              _formKey.currentState.save();
+                              saveUserData();
+
+                              Navigator.push(context, MaterialPageRoute(builder: (context) {
                           return RegisterStepOne();
                         }));
                             }
@@ -78,4 +102,3 @@ class CreateAcPage extends StatelessWidget {
   }
 }
 
-final _formKey = GlobalKey<FormState>();
