@@ -1,19 +1,50 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'searchTrainer.dart';
 
 final Color darkBlue = Color.fromARGB(255, 18, 32, 47);
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+
+
+  var email = '';
+  var password = '';
+
+  @override
+
+  void initState() {
+    super.initState();
+
+    SharedPreferences.getInstance().then((instance) {
+      setState(() {
+        email = instance.getString('user_email');
+        password = instance.getString('user_pass');
+      });
+    });
+  }
+
   Widget build(BuildContext context) {
+
+
     return Scaffold(
         appBar: AppBar(
           title: Text('Seja bem-Vindo(a) de volta!', textAlign: TextAlign.center),
           centerTitle: true,
           backgroundColor: Colors.transparent,
         ),
-        body: Padding(
+        body: login()
+      );
+  }
+
+  Widget login() {
+        final _formKey = GlobalKey<FormState>();
+    return Padding(
             padding: const EdgeInsets.only(right: 30, left: 30),
             child: Form(
               key: _formKey,
@@ -24,11 +55,14 @@ class LoginPage extends StatelessWidget {
                   TextFormField(
                     autofocus: true,
                     decoration: const InputDecoration(
-                      hintText: 'Informe seu email',
+                      hintText: 'Informe seu login',
                     ),
                     validator: (value) {
                       if (value.isEmpty) {
                         return 'Por favor, precisamos do seu email';
+                      }
+                      if (value != email) {
+                        return 'Esse email não foi cadastrado ou está incorreto';
                       }
                       return null;
                     },
@@ -43,6 +77,9 @@ class LoginPage extends StatelessWidget {
                       if (value.isEmpty) {
                         return 'Por favor, você precisa informar sua senha';
                       }
+                      if (value != password) {
+                        return 'Senha Incorreta';
+                      }
                       return null;
                     },
                   ),
@@ -53,10 +90,8 @@ class LoginPage extends StatelessWidget {
                           textColor: Colors.white,
                           padding: EdgeInsets.all(10.0),
                           onPressed: () {
-                            // Validate will return true if the form is valid, or false if
-                            // the form is invalid.
                             if (_formKey.currentState.validate()) {
-                               Navigator.push(context, MaterialPageRoute(builder: (context) {
+                               Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
                           return ListTrainer();
                         }));
                             }
@@ -67,9 +102,8 @@ class LoginPage extends StatelessWidget {
                           ))),
                 ],
               ),
-            )),
-      );
+            ));
   }
 }
 
-final _formKey = GlobalKey<FormState>();
+
