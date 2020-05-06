@@ -81,23 +81,23 @@ class _CreateAcPageState extends State<CreateAcPage> {
                           textColor: Colors.white,
                           padding: EdgeInsets.all(10.0),
                           onPressed: () {
-
                             if (_formKey.currentState.validate()) {
                               _formKey.currentState.save();
                               saveUserData();
 
-                              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                          return RegisterStepOne();
-                        }));
+                              Navigator.push(context, MaterialPageRoute(builder: (context) {return RegisterStepOne();}));
                             }
                           },
                           child: Text(
                             "Criar Conta",
                             style: TextStyle(fontSize: 20.0),
-                          ))),
+                          )
+                      )
+                  ),
                 ],
               ),
-            )),
+            )
+        ),
       );
   }
 }
