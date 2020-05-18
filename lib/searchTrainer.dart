@@ -1,6 +1,8 @@
 import 'package:MyPersonal/start.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'trainerProfileA.dart';
+import 'trainerProfileB.dart';
 
 final Color darkBlue = Color.fromARGB(255, 18, 32, 47);
 
@@ -39,9 +41,6 @@ class _ListTrainerState extends State<ListTrainer> {
           centerTitle: true,
           backgroundColor: Colors.transparent,
           actions: <Widget>[
-
-            //COLOQUEI ESSE ICON APENAS PARA SAIR PRA TELA INICIAL E TESTAR O LOGIN
-
             IconButton(
               icon: Icon(Icons.exit_to_app),
               onPressed: () {
@@ -50,7 +49,10 @@ class _ListTrainerState extends State<ListTrainer> {
             )
           ],
         ),
-        body: trainerList()
+        body: SingleChildScrollView(
+          child: 
+            trainerList()
+        )
       )
     );
   }
@@ -63,64 +65,70 @@ class _ListTrainerState extends State<ListTrainer> {
             children : trainers.map((trainer){
               return Column (
                 children: [
-                  Container (
-                    margin: EdgeInsets.all(20),
-                    height: 150,
-                    width: double.infinity,
-                    decoration:
-                      BoxDecoration(
-                        border: Border.all(color: Colors.green),
-                        borderRadius: const BorderRadius.all(const Radius.circular(10)),
-                      ),  
+                  new GestureDetector(
+                    onTap: (){
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {return TrainerBProfile();}));
+                    },
                     child:
-                      Padding(
-                        padding: EdgeInsets.only(top: 5, bottom: 5),
+                      Container (
+                        margin: EdgeInsets.all(20),
+                        height: 150,
+                        width: double.infinity,
+                        decoration:
+                          BoxDecoration(
+                            border: Border.all(color: Colors.green),
+                            borderRadius: const BorderRadius.all(const Radius.circular(10)),
+                          ),  
                         child:
-                          Row (
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Column (
+                          Padding(
+                            padding: EdgeInsets.only(top: 5, bottom: 5),
+                            child:
+                              Row (
                                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 children: [
-                                  Container(
-                                    decoration:
-                                      BoxDecoration(
-                                        border: Border.all(color: Colors.green),
-                                        borderRadius: const BorderRadius.all(const Radius.circular(100)),
-                                      ), 
-                                    child:
-                                      Center (
-                                        child:
-                                          ClipRRect(
-                                            borderRadius: const BorderRadius.all(const Radius.circular(100)),
-                                            child: Image.network(trainer['profile_picture'], width: 70, height: 70))
-                                      )
-                                  ),
-                                  Row(
+                                  Column (
+                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                                     children: [
-                                      Text(trainer['firstname'] + ' '),
+                                      Container(
+                                        decoration:
+                                          BoxDecoration(
+                                            border: Border.all(color: Colors.green),
+                                            borderRadius: const BorderRadius.all(const Radius.circular(100)),
+                                          ), 
+                                        child:
+                                          Center (
+                                            child:
+                                              ClipRRect(
+                                                borderRadius: const BorderRadius.all(const Radius.circular(100)),
+                                                child: Image.network(trainer['profile_picture'], width: 70, height: 70))
+                                          )
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text(trainer['firstname'] + ' '),
+                                          
+                                          Divider(),
+
+                                          Text(trainer['lastname']),
+                                        ],
+                                      )
+                                    ]
+                                  ),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children:[
+                                      Text('Avaliação'),
                                       
                                       Divider(),
-
-                                      Text(trainer['lastname']),
-                                    ],
+                                      
+                                      Text('${trainer['avaliation']}/5.0'),
+                                    ]
                                   )
                                 ]
                               ),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children:[
-                                  Text('Avaliação'),
-                                  
-                                  Divider(),
-                                  
-                                  Text('${trainer['avaliation']}/5.0'),
-                                ]
-                              )
-                            ]
-                          ),
-                      )
-                  )               
+                          )
+                      )     
+                  )          
                 ],
               );
             }).toList()
