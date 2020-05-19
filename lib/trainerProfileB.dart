@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'contractDef.dart';
 import 'searchTrainer.dart';
+import 'trainerAvaliations.dart';
 
 final Color darkBlue = Color.fromARGB(255, 18, 32, 47);
 
@@ -233,48 +234,54 @@ class _TrainerBProfileState extends State<TrainerBProfile> {
                         ) 
                       )
                   ),
-                  Text('clique para ver todas as avaliações')
+                  FlatButton(
+                    color: Colors.transparent,
+                    textColor: Colors.green,
+                    padding: EdgeInsets.all(10.0),
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) { return AllAvaliations();}));
+                    },
+                    child: Text("Clique para ver todas avaliações", style: TextStyle(fontSize: 15.0))
+                  ),
                 ],
               )
           ),
           Divider(),
-                              FlatButton(
-                      color: Colors.blue,
-                        textColor: Colors.white,
-                          padding: EdgeInsets.all(10.0),
-                          onPressed: () {
+          FlatButton(
+            color: Colors.blue,
+            textColor: Colors.white,
+            padding: EdgeInsets.all(10.0),
+            onPressed: () {
                             /**/
-                          },
-                          child: Text("Portifólio", style: TextStyle(fontSize: 20.0))
-                    ),
+            },
+            child: Text("Portifólio", style: TextStyle(fontSize: 20.0))
+          ),
           Container(
-            height: 110,
+            height: 80,
             child: 
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        FlatButton(
-                          color: Colors.white,
-                          textColor: Colors.green,
-                            padding: EdgeInsets.all(10.0),
-                            onPressed: () {
-                              /**/
-                            },
-                          child: Text("Mensagem", style: TextStyle(fontSize: 20.0))
-                        ),
-                        FlatButton(
-                          color: Colors.green,
-                            textColor: Colors.white,
-                              padding: EdgeInsets.all(10.0),
-                              onPressed: () {
-                                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {return ContractDef();}));
-                              },
-                          child: Text("Contratar", style: TextStyle(fontSize: 20.0))
-                        ),
-                      ],
-                    )
-                
-              
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  FlatButton(
+                    color: Colors.white,
+                    textColor: Colors.green,
+                      padding: EdgeInsets.all(10.0),
+                      onPressed: () {
+                        /**/
+                      },
+                    child: Text("Mensagem", style: TextStyle(fontSize: 20.0))
+                  ),
+                  FlatButton(
+                    color: Colors.green,
+                    textColor: Colors.white,
+                    padding: EdgeInsets.all(10.0),
+                    onPressed: () {
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {return ContractDef();}));
+                    },
+                    child: Text("Contratar", style: TextStyle(fontSize: 20.0))
+                  ),
+                ],
+              )
           )
         ]
     )
