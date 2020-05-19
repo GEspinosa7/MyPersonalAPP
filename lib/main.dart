@@ -1,3 +1,4 @@
+import 'package:MyPersonal/cancelServices.dart';
 import 'package:flutter/material.dart';
 import 'start.dart';
 
@@ -13,7 +14,7 @@ class MyPersonal extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData.dark().copyWith(scaffoldBackgroundColor: darkBlue),
       debugShowCheckedModeBanner: false,
-      home: StartPage(),
+      home: CancelServices(),
       );
   }
 }
