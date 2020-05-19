@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'cancelServices.dart';
 import 'searchTrainer.dart';
 
 final Color darkBlue = Color.fromARGB(255, 18, 32, 47);
@@ -220,7 +221,7 @@ class _TrainerAProfileState extends State<TrainerAProfile> {
                     textColor: Colors.red,
                       padding: EdgeInsets.all(10.0),
                       onPressed: () {
-                        /**/
+                        Navigator.push(context, MaterialPageRoute(builder: (context) { return CancelServices();}));
                       },
                     child: Text("Cancelar Serviços", style: TextStyle(fontSize: 20.0))
                   ),
