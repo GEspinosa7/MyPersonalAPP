@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'avaliationArea.dart';
 import 'cancelServices.dart';
 import 'searchTrainer.dart';
 
@@ -206,7 +207,7 @@ class _TrainerAProfileState extends State<TrainerAProfile> {
               textColor: Colors.black,
                 padding: EdgeInsets.all(10.0),
                 onPressed: () {
-                  /**/
+                   Navigator.push(context, MaterialPageRoute(builder: (context) { return AvaliationArea();}));
                 },
                 child: Text("Avaliar", style: TextStyle(fontSize: 20.0))
           ),
