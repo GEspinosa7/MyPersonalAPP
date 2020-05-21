@@ -1,3 +1,4 @@
+import 'package:MyPersonal/evolution_gallery.dart';
 import 'package:MyPersonal/paymentMethods.dart';
 import 'package:MyPersonal/trainerProfileA.dart';
 import 'package:flutter/material.dart';
@@ -109,6 +110,76 @@ class _HomePageState extends State<HomePage> {
       )     
     );
   }
+  
+  showKeepAsking(BuildContext context) {
+
+    Widget photoButton = FlatButton(
+      child: Text("Enviar Foto", style: TextStyle(color: Colors.blue)),
+      onPressed:  () {
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {return Gallery();}));
+      },
+    );
+    
+    Widget confirmButton = FlatButton(
+      child: Text("Continuar sem foto", style: TextStyle(color: Colors.orange)),
+      onPressed:  () {},
+    );
+
+    AlertDialog alert = AlertDialog(
+      title: Text("Term certeza que não quer enviar uma foto?"),
+      content: Text("Sem ela vocẽ não poderá acompanhar sua evolução"),
+      backgroundColor: darkBlue,
+      actions: [
+        confirmButton,
+        photoButton,
+      ],
+    );
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
+  showAlertDialog1(BuildContext context) {
+
+    Widget photoButton = FlatButton(
+      child: Text("Enviar Foto", style: TextStyle(color: Colors.blue)),
+      onPressed:  () {
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {return Gallery();}));
+      },
+    );
+
+    Widget cancelButton = FlatButton(
+      child: Text("Não", style: TextStyle(color: Colors.red)),
+      onPressed:  () {Navigator.pop(context);},
+    );
+
+    Widget confirmButton = FlatButton(
+      child: Text("Sim, pontuar", style: TextStyle(color: Colors.green)),
+      onPressed:  () {showKeepAsking(context);},
+    );
+
+    AlertDialog alert = AlertDialog(
+      title: Text("Antes disso.."),
+      content: Text("Você realmente treinou hoje?"),
+      backgroundColor: darkBlue,
+      actions: [
+        cancelButton,
+        confirmButton,
+        photoButton,
+      ],
+    );
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
 
   Widget homeScreen(){
     return Center(
@@ -209,7 +280,7 @@ class _HomePageState extends State<HomePage> {
                     textColor: Colors.white,
                       padding: EdgeInsets.all(10.0),
                       onPressed: () {
-                        // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {return ListTrainer();}));
+                        showAlertDialog1(context);
                       },
                       child: Text("Pontuar", style: TextStyle(fontSize: 20.0))
                 ),
