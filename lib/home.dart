@@ -1,5 +1,7 @@
 import 'package:MyPersonal/evolution_gallery.dart';
+import 'package:MyPersonal/exercises_area.dart';
 import 'package:MyPersonal/paymentMethods.dart';
+import 'package:MyPersonal/score_area.dart';
 import 'package:MyPersonal/trainerProfileA.dart';
 import 'package:flutter/material.dart';
 
@@ -66,8 +68,7 @@ class _HomePageState extends State<HomePage> {
                     ListTile(
                       title: Text('Pontuação'),
                       onTap: () {
-
-                        Navigator.pop(context);
+                         Navigator.push(context, MaterialPageRoute(builder: (context) {return ScoreArea();}));
                       },
                     ),
                     ListTile(
@@ -271,7 +272,7 @@ class _HomePageState extends State<HomePage> {
                   textColor: Colors.white,
                     padding: EdgeInsets.all(10.0),
                     onPressed: () {
-                      // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {return ListTrainer();}));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) {return ExercisesArea();}));
                     },
                     child: Text("Treino completo", style: TextStyle(fontSize: 20.0))
                 ),
