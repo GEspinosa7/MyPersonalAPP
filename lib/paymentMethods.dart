@@ -22,7 +22,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                   IconButton(
                     icon: Icon(Icons.arrow_back),
                     onPressed: () {
-                      // Navigator.push(context, MaterialPageRoute(builder: (context) { return TrainerBProfile();}));
+                      Navigator.pop(context);
                     },
                   )
                 ],

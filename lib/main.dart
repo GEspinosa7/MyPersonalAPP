@@ -1,6 +1,5 @@
-import 'package:MyPersonal/cancelServices.dart';
 import 'package:flutter/material.dart';
-import 'start.dart';
+import 'home.dart';
 
 final Color darkBlue = Color.fromARGB(255, 18, 32, 47);
 
@@ -14,7 +13,7 @@ class MyPersonal extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData.dark().copyWith(scaffoldBackgroundColor: darkBlue),
       debugShowCheckedModeBanner: false,
-      home: CancelServices(),
+      home: HomePage(),
       );
   }
 }

@@ -1,5 +1,7 @@
 import 'package:MyPersonal/evolution_gallery.dart';
 import 'package:MyPersonal/exercises_area.dart';
+import 'package:MyPersonal/help.dart';
+import 'package:MyPersonal/my_profile.dart';
 import 'package:MyPersonal/paymentMethods.dart';
 import 'package:MyPersonal/score_area.dart';
 import 'package:MyPersonal/trainerProfileA.dart';
@@ -40,24 +42,30 @@ class _HomePageState extends State<HomePage> {
                           child: 
                             Column(
                               children: [
-                                Container(
-                                  width: 100,
-                                  height: 100,
-                                  margin: EdgeInsets.only(bottom: 10),
-                                  decoration:
-                                    BoxDecoration(
-                                      border: Border.all(color: darkBlue),
-                                      borderRadius: const BorderRadius.all(const Radius.circular(100)),
-                                    ), 
-                                  child:
-                                    Center (
+                                GestureDetector(
+                                  onTap: (){
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) {return MyProfile();}));
+                                  },
+                                  child: 
+                                    Container(
+                                      width: 100,
+                                      height: 100,
+                                      margin: EdgeInsets.only(bottom: 10),
+                                      decoration:
+                                        BoxDecoration(
+                                          border: Border.all(color: darkBlue),
+                                          borderRadius: const BorderRadius.all(const Radius.circular(100)),
+                                        ), 
                                       child:
-                                        Icon(Icons.add_a_photo)
-                                        // ClipRRect(
-                                        //   borderRadius: const BorderRadius.all(const Radius.circular(100)),
-                                        //   child: Image.asset('assets/img/indice.jpeg', width: 100, height: 100)
-                                        // )
-                                    )
+                                        Center (
+                                          child:
+                                            Icon(Icons.add_a_photo)
+                                            // ClipRRect(
+                                            //   borderRadius: const BorderRadius.all(const Radius.circular(100)),
+                                            //   child: Image.asset('assets/img/indice.jpeg', width: 100, height: 100)
+                                            // )
+                                        )
+                                    ),
                                 ),
                                 Text('Gabriel Espinosa', style: TextStyle(color: darkBlue),)
                               ],
@@ -80,15 +88,7 @@ class _HomePageState extends State<HomePage> {
                     ListTile(
                       title: Text('Ajuda'),
                       onTap: () {
-
-                        Navigator.pop(context);
-                      },
-                    ),
-                    ListTile(
-                      title: Text('Segurança'),
-                      onTap: () {
-
-                        Navigator.pop(context);
+                         Navigator.push(context, MaterialPageRoute(builder: (context) {return HelpArea();}));
                       },
                     ),
                     ListTile(
