@@ -1,5 +1,5 @@
+import 'package:MyPersonal/pages/start.dart';
 import 'package:flutter/material.dart';
-import 'home.dart';
 
 final Color darkBlue = Color.fromARGB(255, 18, 32, 47);
 
@@ -13,7 +13,7 @@ class MyPersonal extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData.dark().copyWith(scaffoldBackgroundColor: darkBlue),
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: StartPage(),
       );
   }
 }
