@@ -26,6 +26,12 @@ dependencies:
   dio: ^3.0.9
   shared_preferences: ^0.5.6+3
   smooth_star_rating: 1.1.0+1
+  camera: ^0.5.8+1
+  path_provider: ^1.6.8
+  path: ^1.6.4
+  image_picker: ^0.6.6+4
+  firebase_core: ^0.4.5
+  firebase_auth: ^0.16.1
 
 dev_dependencies:
   flutter_test:
@@ -47,6 +53,7 @@ flutter:
   #  - images/a_dot_ham.jpeg
   assets:
     - assets/img/logo.png
+    - assets/img/eu.jpg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see
