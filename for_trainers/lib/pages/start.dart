@@ -1,9 +1,12 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:my_personal_personaltrainer/pages/home.dart';
 import 'package:my_personal_personaltrainer/pages/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:my_personal_personaltrainer/services/trainer_service.dart';
+import 'package:my_personal_personaltrainer/utils/colors.dart';
 
-import 'ProfileRegister.dart';
+import 'trainer_profile_register.dart';
 
 class StartPage extends StatefulWidget {
   @override
@@ -12,6 +15,7 @@ class StartPage extends StatefulWidget {
 
 class _StartPageState extends State<StartPage> {
   final _auth = FirebaseAuth.instance;
+  final _service = TrainerService();
 
   @override
   void initState() {
@@ -24,13 +28,13 @@ class _StartPageState extends State<StartPage> {
 
     if (user != null) {
       try {
-        // await _service.getPerfil(user.uid);
+        await _service.getTrainerProfile(user.uid);
         Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (context) => HomePage(),
         ));
       } catch (e) {
         Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => ProfileRegister(),
+          builder: (context) => TrainerProfileRegister(),
         ));
       }
     } else {
@@ -44,7 +48,9 @@ class _StartPageState extends State<StartPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: CircularProgressIndicator(),
+        child: CircularProgressIndicator(
+          backgroundColor: mainGreen,
+        ),
       ),
     );
   }

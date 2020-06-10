@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:my_personal_personaltrainer/pages/ProfileRegister.dart';
+import 'package:my_personal_personaltrainer/pages/trainer_profile_register.dart';
 import 'package:my_personal_personaltrainer/pages/home.dart';
 
 import 'login.dart';
@@ -100,10 +100,9 @@ class _CreatePageState extends State<CreatePage> {
 
     try {
       await _auth.createUserWithEmailAndPassword(email: _email, password: _password);
-      // Navigator.of(context)
-      //   .pushReplacement(MaterialPageRoute(builder: (context) => ProfileRegister()));
-            Navigator.of(context)
-        .pushReplacement(MaterialPageRoute(builder: (context) => HomePage()));
+      Navigator.of(context)
+        .pushReplacement(MaterialPageRoute(builder: (context) => TrainerProfileRegister()));
+
     } catch (e) {
       print(e);
     }
