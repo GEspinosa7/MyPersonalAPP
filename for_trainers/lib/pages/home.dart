@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:my_personal_personaltrainer/pages/start.dart';
+import 'package:my_personal_personaltrainer/utils/colors.dart';
+
 
 class HomePage extends StatefulWidget {
   @override
@@ -26,17 +28,19 @@ class _HomePageState extends State<HomePage> {
 				appBar: AppBar (
           title: Text('MyPersonal', textAlign: TextAlign.center),
           centerTitle: true,
-          backgroundColor: Color.fromARGB(255, 18, 32, 47),
+          backgroundColor: mainBlack
         ),
-        body: Text('Home'),
+        body: home(),
+        backgroundColor: mainGreen,
          drawer: Drawer(
-              child:
-                ListView(
+              child: Container(
+                color: mainBlack,
+                child: ListView(
                   padding: EdgeInsets.zero,
                   children: <Widget>[
                     DrawerHeader(
                       decoration: BoxDecoration(
-                        color: Colors.green,
+                        color: mainGreen,
                       ),
                       child: 
                         Center(
@@ -119,7 +123,49 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ],
                 ),
+              )
         )
+    );
+  }
+
+  Widget home(){
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              Column(
+                children: <Widget>[
+                  homeActions(),
+                  homeActions(),
+                  homeActions(),
+                  homeActions(),
+                ]
+              ),
+              Column(
+                children: <Widget>[
+                  homeActions(),
+                  homeActions(),
+                  homeActions(),
+                  homeActions(),
+                ]
+              ),
+            ]
+        )
+      ]
+    );
+  }
+
+  Widget homeActions({text: 'Bloco' }){
+    return Container(
+      width: 150,
+      height: 110,
+      color: mainBlack,
+      margin: EdgeInsets.all(15),
+      child: Center(
+        child: Text(text, textAlign: TextAlign.center, style: TextStyle(fontSize: 20),) 
+      ),
     );
   }
 
