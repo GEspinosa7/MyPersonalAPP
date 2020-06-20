@@ -18,11 +18,6 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('MyPersonal - For Trainers', textAlign: TextAlign.center),
-          centerTitle: true,
-          backgroundColor: Colors.transparent,
-        ),
         body: Container(
           padding: const EdgeInsets.only(right: 30, left: 30),
           child: Form(
@@ -31,6 +26,10 @@ class _LoginPageState extends State<LoginPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
+                Container(
+                  margin: EdgeInsets.only(bottom: 50),
+                  child: Image.asset('assets/img/logo_texto.png'),
+                ),
                 Container(
                   margin: EdgeInsets.only(bottom: 20),
                   child: Center(

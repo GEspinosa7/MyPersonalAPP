@@ -1,7 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:my_personal_personaltrainer/models/trainer_model.dart';
+import 'package:my_personal_personaltrainer/pages/agenda.dart';
+import 'package:my_personal_personaltrainer/pages/avaliations_area.dart';
+import 'package:my_personal_personaltrainer/pages/configurations.dart';
+import 'package:my_personal_personaltrainer/pages/my_profile.dart';
+import 'package:my_personal_personaltrainer/pages/profile_configurations.dart';
 import 'package:my_personal_personaltrainer/pages/start.dart';
+import 'package:my_personal_personaltrainer/services/trainer_service.dart';
 import 'package:my_personal_personaltrainer/utils/colors.dart';
+import 'package:my_personal_personaltrainer/utils/load_screen.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -10,6 +18,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  TrainerModel trainerProfile;
+  final service = TrainerService();
+
   final _auth = FirebaseAuth.instance;
   var _userEmail = '';
 
@@ -19,14 +30,25 @@ class _HomePageState extends State<HomePage> {
     super.initState();
       _auth.currentUser().then((user) {
         setState(() =>_userEmail = user.email);
-        });
+        _loadTrainerProfile();
+      });
   }
+
+  _loadTrainerProfile() async {
+    final _trainerUser = await _auth.currentUser();
+    final resp = await service.getTrainerProfile(_trainerUser.uid);
+    setState(() {
+      trainerProfile = resp;
+    });
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return trainerProfile == null ? normalLoad() : Scaffold(
 				appBar: AppBar (
-          title: Text('MyPersonal', textAlign: TextAlign.center),
+          title: Text('Home', textAlign: TextAlign.center),
           centerTitle: true,
           backgroundColor: mainBlack
         ),
@@ -49,7 +71,7 @@ class _HomePageState extends State<HomePage> {
                               children: [
                                 GestureDetector(
                                   onTap: (){
-                                    // Navigator.push(context, MaterialPageRoute(builder: (context) {return MyProfile();}));
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) {return MyProfile();}));
                                   },
                                   child: 
                                     Container(
@@ -58,7 +80,8 @@ class _HomePageState extends State<HomePage> {
                                       margin: EdgeInsets.only(bottom: 10),
                                       decoration:
                                         BoxDecoration(
-                                          border: Border.all(color: Colors.black),
+                                          color: mainBlack,
+                                          border: Border.all(color: mainGreen),
                                           borderRadius: const BorderRadius.all(const Radius.circular(100)),
                                         ), 
                                       child:
@@ -72,53 +95,35 @@ class _HomePageState extends State<HomePage> {
                                         )
                                     ),
                                 ),
-                                Text(_userEmail, style: TextStyle(color: Colors.black),)
+                                Text(trainerProfile.name + " " + trainerProfile.lastname, style: TextStyle(color: Colors.black),)
                               ],
                             )
 
                         )
                     ),
                     ListTile(
-                      title: Text('Portifólio'),
+                      title: Text('Meu Perfil'),
                       onTap: () {
-                        //  Navigator.push(context, MaterialPageRoute(builder: (context) {return ScoreArea();}));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) {return MyProfile();}));
+                      },
+                    ),
+                    ListTile(
+                      title: Text('Configurações'),
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) {return ConfigArea();}));
                       },
                     ),
                     ListTile(
                       title: Text('Pagamento'),
                       onTap: () {
-                        //  Navigator.push(context, MaterialPageRoute(builder: (context) {return PaymentMethod();}));
-                      },
-                    ),
-                    ListTile(
-                      title: Text('Avaliações'),
-                      onTap: () {
-                        //  Navigator.push(context, MaterialPageRoute(builder: (context) {return PaymentMethod();}));
-                      },
-                    ),
-                    ListTile(
-                      title: Text('Mensagens'),
-                      onTap: () {
-                        //  Navigator.push(context, MaterialPageRoute(builder: (context) {return PaymentMethod();}));
+                        //  Navigator.push(context, MaterialPageRoute(builder: (context) {return HelpArea();}));
                       },
                     ),
                     ListTile(
                       title: Text('Ajuda'),
                       onTap: () {
-                        //  Navigator.push(context, MaterialPageRoute(builder: (context) {return HelpArea();}));
-                      },
-                    ),
-                    ListTile(
-                      title: Text('Confirguações'),
-                      onTap: () {
 
                         Navigator.pop(context);
-                      },
-                    ),
-                    ListTile(
-                      title: Text('Sair'),
-                      onTap: () {
-                        _sair();
                       },
                     ),
                   ],
@@ -129,45 +134,52 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget home(){
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              Column(
-                children: <Widget>[
-                  homeActions(),
-                  homeActions(),
-                  homeActions(),
-                  homeActions(),
-                ]
-              ),
-              Column(
-                children: <Widget>[
-                  homeActions(),
-                  homeActions(),
-                  homeActions(),
-                  homeActions(),
-                ]
-              ),
-            ]
-        )
-      ]
+    return Container(
+        child: GridView.count(
+          primary: false,
+          padding: const EdgeInsets.all(20),
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10,
+          crossAxisCount: 2,
+          children: <Widget>[
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {return Agenda();}));
+              },
+              child: homeActions(actionName: 'Agenda', provcolor: mainBlack)
+            ),
+            homeActions(actionName: 'Alunos'),
+            homeActions(actionName: 'Treino'),
+            homeActions(actionName: 'Mensagens'),
+            homeActions(actionName: 'Portifólio'),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {return AvaliationsArea();}));
+              },
+              child: homeActions(actionName: 'Avaliações', provcolor: Colors.grey)
+            ),
+          ],
+        ),
     );
   }
 
-  Widget homeActions({text: 'Bloco' }){
+  Widget homeActions({actionName: 'Bloco', provcolor: Colors.grey }){
     return Container(
       width: 150,
       height: 110,
-      color: mainBlack,
       margin: EdgeInsets.all(15),
+      decoration:
+        BoxDecoration(
+          color: provcolor,
+          border: Border.all(color: mainGreen),
+          borderRadius: const BorderRadius.all(const Radius.circular(15)),
+      ), 
       child: Center(
-        child: Text(text, textAlign: TextAlign.center, style: TextStyle(fontSize: 20),) 
+        child: Text(actionName, textAlign: TextAlign.center, style: TextStyle(fontSize: 20),) 
       ),
     );
   }
+  
 
   _sair() async {
     _auth.signOut();

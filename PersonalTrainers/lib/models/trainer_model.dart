@@ -6,7 +6,7 @@ class TrainerModel {
   String timeActing;
   String qualifications;
   String availability;
-  int price;
+  String price;
   String uid;
   String createdAt;
   String updatedAt;

@@ -1,11 +1,10 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:my_personal_personaltrainer/pages/home.dart';
 import 'package:my_personal_personaltrainer/pages/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:my_personal_personaltrainer/services/trainer_service.dart';
-import 'package:my_personal_personaltrainer/utils/colors.dart';
 import 'package:my_personal_personaltrainer/utils/http.dart';
+import 'package:my_personal_personaltrainer/utils/load_screen.dart';
 
 import 'trainer_profile_register.dart';
 
@@ -48,12 +47,6 @@ class _StartPageState extends State<StartPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: CircularProgressIndicator(
-          backgroundColor: mainGreen,
-        ),
-      ),
-    );
+    return mainLoad();
   }
 }

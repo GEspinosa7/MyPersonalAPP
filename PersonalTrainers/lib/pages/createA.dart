@@ -34,6 +34,10 @@ class _CreatePageState extends State<CreatePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Container(
+                  margin: EdgeInsets.only(bottom: 50),
+                  child: Image.asset('assets/img/logo_texto.png'),
+                ),
+                Container(
                   margin: EdgeInsets.only(bottom: 20),
                   child: Center(
                     child: Text('Crie sua conta', style: TextStyle(fontSize: 20.0)),
