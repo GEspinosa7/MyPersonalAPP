@@ -5,6 +5,7 @@ import 'package:my_personal_personaltrainer/pages/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:my_personal_personaltrainer/services/trainer_service.dart';
 import 'package:my_personal_personaltrainer/utils/colors.dart';
+import 'package:my_personal_personaltrainer/utils/http.dart';
 
 import 'trainer_profile_register.dart';
 
@@ -29,6 +30,7 @@ class _StartPageState extends State<StartPage> {
     if (user != null) {
       try {
         await _service.getTrainerProfile(user.uid);
+        HttpClient.instance.options.headers['token'] = user.uid;
         Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (context) => HomePage(),
         ));

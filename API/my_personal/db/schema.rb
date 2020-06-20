@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_10_134938) do
+ActiveRecord::Schema.define(version: 2020_06_17_235958) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -33,6 +33,32 @@ ActiveRecord::Schema.define(version: 2020_06_10_134938) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "clients", force: :cascade do |t|
+    t.string "name"
+    t.string "lastname"
+    t.date "birth_date"
+    t.string "weight"
+    t.string "height"
+    t.string "goal"
+    t.string "time_active"
+    t.string "availability"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "uid"
+  end
+
+  create_table "exercises", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.string "equipment"
+    t.integer "times"
+    t.integer "training_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "series"
+    t.index ["training_id"], name: "index_exercises_on_training_id"
+  end
+
   create_table "trainers", force: :cascade do |t|
     t.string "name"
     t.string "lastname"
@@ -40,11 +66,27 @@ ActiveRecord::Schema.define(version: 2020_06_10_134938) do
     t.string "time_acting"
     t.string "qualifications"
     t.string "availability"
-    t.float "price"
     t.string "uid"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "price"
+  end
+
+  create_table "trainings", force: :cascade do |t|
+    t.string "kind"
+    t.string "division"
+    t.date "date_start"
+    t.date "date_end"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "client_id", null: false
+    t.integer "trainer_id", null: false
+    t.index ["client_id"], name: "index_trainings_on_client_id"
+    t.index ["trainer_id"], name: "index_trainings_on_trainer_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "exercises", "trainings"
+  add_foreign_key "trainings", "clients"
+  add_foreign_key "trainings", "trainers"
 end

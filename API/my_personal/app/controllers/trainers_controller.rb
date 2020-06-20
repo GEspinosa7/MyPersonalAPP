@@ -1,5 +1,5 @@
 class TrainersController < ApplicationController
-  skip_before_action :authenticate_trainer!, only: :create
+  skip_before_action :authenticate_user!, only: :create
   before_action :set_trainer, only: [:me, :update, :destroy]
 
 
