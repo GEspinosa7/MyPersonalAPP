@@ -1,10 +1,13 @@
 import 'package:MyPersonal/pages/home.dart';
 import 'package:MyPersonal/pages/login.dart';
-import 'package:MyPersonal/pages/profile_register.dart';
-import 'package:MyPersonal/services/student_profile_service.dart';
+import 'package:MyPersonal/services/client_profile_service.dart';
 import 'package:MyPersonal/utils/http.dart';
+import 'package:MyPersonal/utils/load_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
+
+import 'client_profile_register.dart';
 
 class StartPage extends StatefulWidget {
   @override
@@ -13,7 +16,7 @@ class StartPage extends StatefulWidget {
 
 class _StartPageState extends State<StartPage> {
   final _auth = FirebaseAuth.instance;
-   final _service = ProfileSService();
+  final _service = ClientService();
 
   @override
   void initState() {
@@ -26,14 +29,14 @@ class _StartPageState extends State<StartPage> {
 
     if (user != null) {
       try {
-        await _service.getProfile(user.uid);
+        await _service.getClientProfile(user.uid);
         HttpClient.instance.options.headers['token'] = user.uid;
         Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (context) => HomePage(),
         ));
       } catch (e) {
         Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => ProfileRegister(),
+          builder: (context) => ClientProfileRegister(),
         ));
       }
     } else {
@@ -45,10 +48,6 @@ class _StartPageState extends State<StartPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: CircularProgressIndicator(),
-      ),
-    );
+    return mainLoad();
   }
 }

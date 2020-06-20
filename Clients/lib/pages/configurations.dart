@@ -1,9 +1,7 @@
-import 'package:MyPersonal/pages/my_profile.dart';
 import 'package:MyPersonal/pages/start.dart';
+import 'package:MyPersonal/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
-final Color darkBlue = Color.fromARGB(255, 18, 32, 47);
 
 class ConfigArea extends StatefulWidget {
   @override
@@ -24,44 +22,32 @@ class _ConfigAreaState extends State<ConfigArea> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-            theme: ThemeData.dark().copyWith(scaffoldBackgroundColor: darkBlue),
-            debugShowCheckedModeBanner: false,
-            home: Scaffold(
-              appBar: AppBar(
-                title: Text('Configurações', textAlign: TextAlign.center),
-                centerTitle: true,
-                backgroundColor: Colors.transparent,
-                actions: <Widget>[
-                  IconButton(
-                    icon: Icon(Icons.arrow_back),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  )
-                ],
-              ),
-              body: config()
-              ) 
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Configurações'),
+        centerTitle: true,
+        backgroundColor: mainGreen,
+      ),
+      body: config() 
     );
   }
 
   showConfirmExit(BuildContext context) {
 
     Widget cancelButton = FlatButton(
-      child: Text("Cancelar", style: TextStyle(color: Colors.green)),
+      child: Text("Cancelar", style: TextStyle(color: mainGreen)),
       onPressed:  () {Navigator.pop(context);},
     );
 
     Widget confirmButton = FlatButton(
-      child: Text("Sair", style: TextStyle(color: Colors.red)),
+      child: Text("Sim", style: TextStyle(color: Colors.red)),
       onPressed: () => _sair()
     );
 
     AlertDialog alert = AlertDialog(
       title: Icon(Icons.power_settings_new, color: Colors.red, size: 80,),
       content: Text("Tem certeza que deseja sair?"),
-      backgroundColor: darkBlue,
+      backgroundColor: mainBlack,
       actions: [
         cancelButton,
         confirmButton,
@@ -77,50 +63,61 @@ class _ConfigAreaState extends State<ConfigArea> {
   }
 
   Widget config(){
-    return Column(
-      children: <Widget>[
-        GestureDetector(
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) {return MyProfile();}));
-          },
-          child:
-            configButton(name: 'Perfil', height: 100.0),
-        ),        
-        
-        Divider(),
-        
-        GestureDetector(
-          onTap: (){
+    return Container(
+      color: mainGreen,
+      child: Column(
+        children: <Widget>[
+          GestureDetector(
+            onTap: (){
+              // Navigator.push(context, MaterialPageRoute(builder: (context) {return ProfileConfigs();}));
+            },
+            child:
+              configButton(name: 'Perfil', height: 80.0, borderColor: Colors.white),
+          ),        
+          
+          Divider(),
+          
+          GestureDetector(
+            onTap: (){
 //
-          },
-          child:
-            configButton(name: 'Termos de Uso',),
-        ),
-        GestureDetector(
-          onTap: (){
+            },
+            child:
+              configButton(name: 'Termos de Uso', borderColor: Colors.white),
+          ),
+          GestureDetector(
+            onTap: (){
 //
-          },
-          child:
-            configButton(name: 'Sobre o App',),
-        ),
-        GestureDetector(
-          onTap:  () {showConfirmExit(context);},
-          child:
-            configButton(name: 'Sair', nameColor: Colors.red, iconColor: Colors.red),
-        ),
-      ],
+            },
+            child:
+              configButton(name: 'Sobre o App', borderColor: Colors.white),
+          ),
+          GestureDetector(
+            onTap:  () {showConfirmExit(context);},
+            child:
+              configButton(name: 'Sair', nameColor: Colors.red,iconColor: Colors.red,  borderColor: Colors.red),
+          ),
+        ],
+      ),
     );
   }
 
-  Widget configButton({name: ' ', height: 65.0, nameColor: Colors.white, iconColor: Colors.grey}){
+  Widget configButton({
+    name: ' ',
+    height: 55.0,
+    nameColor: Colors.white,
+    iconColor: Colors.white,
+    bgColor: Colors.transparent,
+    borderColor: Colors.green
+  }){
       return 
           Container(
             width: double.infinity,
             height: height,
-            margin: EdgeInsets.all(5),
+            margin: EdgeInsets.fromLTRB(10, 20, 10, 0),
               decoration:
                 BoxDecoration(
-                  border: Border.all(color: Colors.green),
+                  color: bgColor,
+                  border: Border.all(color: borderColor),
                   borderRadius: const BorderRadius.all(const Radius.circular(10)),
               ),
             child: 
@@ -132,7 +129,7 @@ class _ConfigAreaState extends State<ConfigArea> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Text(name, style: TextStyle(color: nameColor, fontSize: 17),),
+                          Text(name, style: TextStyle(color: nameColor, fontSize: 17, fontWeight: FontWeight.bold),),
                           Icon(Icons.arrow_forward_ios, color: iconColor, size: 17,)
                         ],
                       )

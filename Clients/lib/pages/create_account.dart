@@ -1,18 +1,19 @@
-import 'package:MyPersonal/pages/create_account.dart';
-import 'package:MyPersonal/pages/home.dart';
+import 'package:MyPersonal/pages/client_profile_register.dart';
 import 'package:MyPersonal/utils/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatefulWidget {
+import 'login.dart';
+
+class CreatePage extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _CreatePageState createState() => _CreatePageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _CreatePageState extends State<CreatePage> {
   final _formKey = GlobalKey<FormState>();
   final _auth = FirebaseAuth.instance;
-
+  
   var _email = '';
   var _password = '';
 
@@ -35,12 +36,11 @@ class _LoginPageState extends State<LoginPage> {
                 Container(
                   margin: EdgeInsets.only(bottom: 20),
                   child: Center(
-                    child: Text('Entre com usa conta', style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),),
+                    child: Text('Crie sua conta', style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
                   ),
                 ),
                 TextFormField(
                   autofocus: true,
-                  keyboardType: TextInputType.emailAddress,
                   decoration:  InputDecoration(
                     hintText: 'Informe seu email', 
                     hintStyle: TextStyle(fontWeight: FontWeight.bold),
@@ -65,23 +65,16 @@ class _LoginPageState extends State<LoginPage> {
                           color: Colors.transparent,
                           textColor: Colors.white,
                           padding: EdgeInsets.all(10.0),
-                          onPressed: _gotoCreate, child: Text(
-                            "Não tenho uma conta",
-                            style: TextStyle(
-                              fontSize: 15.0,
-                              fontWeight: FontWeight.bold
-                            )
-                          )
+                          onPressed: _gotoLogin, child: Text("Já tenho uma conta", style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold))
                         ),
                         RaisedButton(
                           color: mainBlack,
                           textColor: Colors.white,
                           padding: EdgeInsets.all(10.0),
-                          onPressed: _loging, child: Text("Entrar", style: TextStyle(fontSize: 20.0))
+                          onPressed: _creating, child: Text("Criar conta", style: TextStyle(fontSize: 20.0))
                         ),
                       ],
                     )
-
                   ),
                 ],
               ),
@@ -90,23 +83,30 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  _gotoCreate() async {
-     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => CreatePage()));
-  }
-
-  _loging() async {
+  _creating() async {
     _formKey.currentState.save();
 
     try {
-      await _auth.signInWithEmailAndPassword(email: _email, password: _password);
+      await _auth.createUserWithEmailAndPassword(email: _email, password: _password);
       Navigator.of(context)
-        .pushReplacement(MaterialPageRoute(builder: (context) => HomePage()));
+        .pushReplacement(MaterialPageRoute(builder: (context) => ClientProfileRegister()));
+
     } catch (e) {
       print(e);
     }
+    print(_email);
+    print(_password);
   }
 
+  _gotoLogin() async {
+     Navigator.of(context).pushReplacement(MaterialPageRoute(
+      builder: (context) => LoginPage(),
+    ));
+  }
+}
+
+class Register{
 
 }
 
-class Register{}
+
