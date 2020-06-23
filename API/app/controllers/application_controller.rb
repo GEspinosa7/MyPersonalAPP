@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::API
-
+	
 #auth
 	def authenticate_user!
 		return head(401) if current_user.nil?

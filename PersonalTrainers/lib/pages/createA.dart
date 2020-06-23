@@ -20,11 +20,6 @@ class _CreatePageState extends State<CreatePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Seja bem-Vindo(a)', textAlign: TextAlign.center),
-          centerTitle: true,
-          backgroundColor: Colors.transparent,
-        ),
         body: Container(
           padding: const EdgeInsets.only(right: 30, left: 30),
           child: Form(
