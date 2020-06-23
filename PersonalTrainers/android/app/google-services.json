@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "802291196168",
+    "firebase_url": "https://my-personal---for-trainers.firebaseio.com",
+    "project_id": "my-personal---for-trainers",
+    "storage_bucket": "my-personal---for-trainers.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:802291196168:android:b23225d2f621c7acab0cbd",
+        "android_client_info": {
+          "package_name": "com.example.my_personal_fortrainers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "802291196168-7126minpfjn0hupnmdkllqli08ba42e7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.my_personal_fortrainers",
+            "certificate_hash": "7ab201404c64160f8e4f19074665835ae5464e84"
+          }
+        },
+        {
+          "client_id": "802291196168-7timn4ph7n57mqmog5i6rudm91enp23i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCaJIVRIc2QgMcMwkCg17K6mDNMR7OvP6A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "802291196168-7timn4ph7n57mqmog5i6rudm91enp23i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
