@@ -1,5 +1,6 @@
 //Authentication
 import 'package:MyPersonal/models/client_profile_model.dart';
+import 'package:MyPersonal/pages/time_to_search.dart';
 import 'package:MyPersonal/services/client_profile_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -121,8 +122,7 @@ class _HomePageState extends State<HomePage> {
                 ListTile(
                   title: Text('Ajuda'),
                   onTap: () {
-
-                    Navigator.pop(context);
+                    Navigator.push(context, MaterialPageRoute(builder: (context) {return SearchStep();}));
                   },
                 ),
               ],

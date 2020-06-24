@@ -1,5 +1,5 @@
 import 'package:MyPersonal/models/client_profile_model.dart';
-import 'package:MyPersonal/pages/home.dart';
+import 'package:MyPersonal/pages/time_to_search.dart';
 import 'package:MyPersonal/services/client_profile_service.dart';
 import 'package:MyPersonal/utils/colors.dart';
 import 'package:MyPersonal/validators/name_validator.dart';
@@ -38,6 +38,7 @@ class _ClientProfileRegisterState extends State<ClientProfileRegister> {
                 Container(
                   decoration:
                     BoxDecoration(
+                      color: mainBlack,
                       border: Border.all(color: Colors.white),
                       borderRadius: const BorderRadius.all(const Radius.circular(15)),
                     ),
@@ -47,12 +48,12 @@ class _ClientProfileRegisterState extends State<ClientProfileRegister> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
-                      Text('Dados Pessoais', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                      Text('Dados Pessoais', style: TextStyle( fontWeight: FontWeight.bold, fontSize: 18),),
                       TextFormField(
                         autofocus: true,
                         decoration:  InputDecoration(
                           hintText: 'Nome', 
-                          hintStyle: TextStyle(fontWeight: FontWeight.bold),
+                          hintStyle: TextStyle( fontWeight: FontWeight.bold),
                         ),
                         onSaved: (value) => _clientProfile.name = value,
                         validator: nameValidator,
@@ -60,31 +61,33 @@ class _ClientProfileRegisterState extends State<ClientProfileRegister> {
                       TextFormField(
                         decoration:  InputDecoration(
                           hintText: 'Sobrenome', 
-                          hintStyle: TextStyle(fontWeight: FontWeight.bold),
+                          hintStyle: TextStyle( fontWeight: FontWeight.bold),
                         ),
                         onSaved: (value) => _clientProfile.lastname = value,
-                      ),    
-                      Divider(),  
-                      RaisedButton(
-                        color: mainBlack,
-                        padding: EdgeInsets.all(10),
-                        child: Text(
-                          _dateTime == null ? 'Data de Nascimento' : _dateTime.toString(),
-                          style: TextStyle(fontSize: 15)
-                        ),
-                        onPressed: () {
-                          showDatePicker(  
-                            context: context,
-                            initialDate: _dateTime == null ? DateTime.now() : _dateTime,
-                            firstDate: DateTime(1800),
-                            lastDate: DateTime(3000)
-                          ).then((date) {
-                            setState(() {
-                              _dateTime = date;
-                              _clientProfile.birthDate = date.toString();
+                      ),     
+                      Container(
+                        margin: EdgeInsets.only(top: 10),
+                        child: RaisedButton(
+                          color: mainGreen,
+                          padding: EdgeInsets.all(10),
+                          child: Text(
+                            _dateTime == null ? 'Data de Nascimento' : _dateTime.toString(),
+                            style: TextStyle(fontSize: 15)
+                          ),
+                          onPressed: () {
+                            showDatePicker(  
+                              context: context,
+                              initialDate: _dateTime == null ? DateTime.now() : _dateTime,
+                              firstDate: DateTime(1800),
+                              lastDate: DateTime(3000)
+                            ).then((date) {
+                              setState(() {
+                                _dateTime = date;
+                                _clientProfile.birthDate = date.toString();
+                              });
                             });
-                          });
-                        },
+                          },
+                        ),
                       ),               
                     ],
                   ),
@@ -92,6 +95,7 @@ class _ClientProfileRegisterState extends State<ClientProfileRegister> {
                 Container(
                   decoration:
                     BoxDecoration(
+                      color: mainBlack,
                       border: Border.all(color: Colors.white),
                       borderRadius: const BorderRadius.all(const Radius.circular(15)),
                     ),
@@ -122,6 +126,7 @@ class _ClientProfileRegisterState extends State<ClientProfileRegister> {
                 Container(
                   decoration:
                     BoxDecoration(
+                      color: mainBlack,
                       border: Border.all(color: Colors.white),
                       borderRadius: const BorderRadius.all(const Radius.circular(15)),
                     ),
@@ -160,6 +165,7 @@ class _ClientProfileRegisterState extends State<ClientProfileRegister> {
                 RaisedButton(
                   onPressed: _salvar,
                   color: mainBlack,
+                  splashColor: mainGreen,
                   padding: EdgeInsets.all(10),
                   child: Text(
                     'Salvar Perfil',
@@ -182,7 +188,7 @@ class _ClientProfileRegisterState extends State<ClientProfileRegister> {
       try {
         final clientProfile = await _service.createClientProfile(_clientProfile);
         print(clientProfile.uid);
-        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomePage()));
+        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => SearchStep()));
       } catch (e) {
         print(e);
       }

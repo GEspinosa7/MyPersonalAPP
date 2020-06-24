@@ -30,7 +30,7 @@ class _StartPageState extends State<StartPage> {
     if (user != null) {
       try {
         await _service.getClientProfile(user.uid);
-        HttpClient.instance.options.headers['token'] = user.uid;
+        Http.instance.options.headers['token'] = user.uid;
         Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (context) => HomePage(),
         ));

@@ -4,7 +4,7 @@ import 'package:MyPersonal/utils/http.dart';
 import 'package:dio/dio.dart';
 
 class ClientService {
-  final _dio = HttpClient.instance;
+  final _dio = Http.instance;
 
   Future<ClientModel> createClientProfile(ClientModel clientProfile) async {
     final resp = await _dio.post('/clients', data: clientProfile.toJson());

@@ -104,9 +104,3 @@ class _CreatePageState extends State<CreatePage> {
     ));
   }
 }
-
-class Register{
-
-}
-
-
