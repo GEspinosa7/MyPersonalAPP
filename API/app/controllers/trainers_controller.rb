@@ -2,6 +2,14 @@ class TrainersController < ApplicationController
   before_action :authenticate_user!, except: :create
   before_action :set_trainer, only: [:me, :update, :destroy]
 
+  # GET /trainers
+  def index
+    authenticate_client!
+    
+    @trainers = Trainer.all
+    
+    render json: @trainers
+  end
 
   # GET /trainers/me
   def me

@@ -2,6 +2,17 @@ class ClientsController < ApplicationController
   before_action :authenticate_user!, except: :create
   before_action :set_client, only: [:me, :update, :destroy]
 
+  # GET /clients
+  def index
+    authenticate_trainer!
+
+    @trainer = current_trainer
+
+    @clients = @trainer.clients.all
+
+    render json: @clients
+    
+  end
   
   # GET /clients/me
   def me
