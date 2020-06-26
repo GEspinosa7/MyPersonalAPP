@@ -7,7 +7,7 @@ class ContractsController < ApplicationController
 
     @contracts = current_user.contracts
 
-    render json: @contracts
+    render json: @contracts.to_json(include: [:client, :trainer])
   end
 
   # GET /contracts/1
@@ -24,7 +24,7 @@ class ContractsController < ApplicationController
     if @contract.save
       render json: @contract, status: :created, location: @contract
     else
-      # render json: @contract.errors, status: :unprocessable_entity
+      render json: @contract.errors, status: :unprocessable_entity
     end
   end
 
