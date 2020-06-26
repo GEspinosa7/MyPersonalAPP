@@ -1,4 +1,5 @@
 import 'package:MyPersonal/models/trainer_model.dart';
+import 'package:MyPersonal/pages/contract.dart';
 import 'package:MyPersonal/services/trainer_service.dart';
 import 'package:MyPersonal/utils/colors.dart';
 import 'package:flutter/material.dart';
@@ -16,9 +17,18 @@ class TrainerProfile extends StatefulWidget {
 class _TrainerProfileState extends State<TrainerProfile> {
   final service = TrainerService();
 
+  _goToContractingPage() {
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+      return ContractingPage(
+        trainerId: widget.trainer.id,
+      );
+    }));
+  }
+
   @override
   Widget build(BuildContext context) {
     var rating = 0.0;
+
     return  Scaffold(
       backgroundColor: mainBlack,
 				appBar: AppBar (
@@ -136,7 +146,9 @@ class _TrainerProfileState extends State<TrainerProfile> {
                       children: <Widget>[                      
                         RaisedButton(
                           color: Colors.blue,
-                          onPressed: ()=> null,
+                          onPressed: () {
+                              _goToContractingPage();
+                          },
                           splashColor: Colors.blueGrey,
                           child: Text('Contratar',
                             style: TextStyle(

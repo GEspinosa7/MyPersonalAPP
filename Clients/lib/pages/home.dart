@@ -1,19 +1,15 @@
-//Authentication
+
 import 'package:MyPersonal/models/client_profile_model.dart';
-import 'package:MyPersonal/pages/time_to_search.dart';
+import 'package:MyPersonal/models/contract_model.dart';
+import 'package:MyPersonal/pages/trainer_list.dart';
 import 'package:MyPersonal/services/client_profile_service.dart';
+import 'package:MyPersonal/services/contract_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
-//Material
 import 'package:flutter/material.dart';
-
-// Pages
-import 'package:MyPersonal/pages/profile.dart';
 import 'configurations.dart';
-
-//Utils
 import 'package:MyPersonal/utils/colors.dart';
 import 'package:MyPersonal/utils/load_screen.dart';
+import 'my_personal_trainer_profile.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -23,7 +19,11 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   ClientModel clientProfile;
-  final service = ClientService();
+  final clientService = ClientService();
+
+  ContractModel contract;
+  final contractService = ContractService();
+
   final _auth = FirebaseAuth.instance;
 
   @override
@@ -31,14 +31,22 @@ class _HomePageState extends State<HomePage> {
     super.initState();
       _auth.currentUser().then((user) {
         _loadClientProfile();
+        _loadContract();
       });
   }
 
   _loadClientProfile() async {
     final _clientUser = await _auth.currentUser();
-    final resp = await service.getClientProfile(_clientUser.uid);
+    final resp = await clientService.getClientProfile(_clientUser.uid);
     setState(() {
       clientProfile = resp;
+    });
+  }
+
+  _loadContract() async {
+    final resp = await contractService.getContract();
+    setState(() {
+      contract = resp;
     });
   }
 
@@ -50,7 +58,7 @@ class _HomePageState extends State<HomePage> {
           centerTitle: true,
           backgroundColor: mainGreen
         ),
-        body: home(),
+        body: contract == null ? search() : home(),
         backgroundColor: mainBlack,
          drawer: Drawer(
           child: Container(
@@ -67,7 +75,7 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         GestureDetector(
                             onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context) {return MyProfile();}));
+                              // Navigator.push(context, MaterialPageRoute(builder: (context) {return MyProfile();}));
                             },
                           child: Container(
                             width: 100,
@@ -98,13 +106,13 @@ class _HomePageState extends State<HomePage> {
                 ListTile(
                   title: Text('Meu Perfil'),
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) {return MyProfile();}));
+                    // Navigator.push(context, MaterialPageRoute(builder: (context) {return MyProfile();}));
                   },
                 ),
                 ListTile(
                   title: Text('Meu Personal'),
                   onTap: () {
-                    //  Navigator.push(context, MaterialPageRoute(builder: (context) {return HelpArea();}));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) {return MyTainerProfile();}));
                   },
                 ),
                 ListTile(
@@ -122,7 +130,7 @@ class _HomePageState extends State<HomePage> {
                 ListTile(
                   title: Text('Ajuda'),
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) {return SearchStep();}));
+                    // Navigator.push(context, MaterialPageRoute(builder: (context) {return SearchStep();}));
                   },
                 ),
               ],
@@ -221,7 +229,9 @@ class _HomePageState extends State<HomePage> {
             ),
             RaisedButton(
               color: Colors.lightBlue,
-              onPressed: ()=> null,
+              onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) {return MyTainerProfile();}));
+              },
               splashColor: mainGreen,
               child: Text('Ver Personal',
                 style: TextStyle(
@@ -313,5 +323,46 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  Widget search(){
+        return Center(
+          child: Container(
+            margin: EdgeInsets.all(20),
+            height: 200,
+            decoration: BoxDecoration(
+              color: mainGreen,
+              border: Border.all(color: mainGreen),
+              borderRadius: const BorderRadius.all(const Radius.circular(15)),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.only(bottom: 10),
+                  child: Text(
+                    'Voce ainda não tem um personal trainer',
+                    textAlign: TextAlign.center, 
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),)
+                ),
+                
+                RaisedButton(
+                  color: Colors.transparent,
+                  onPressed: (){
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => TrainerListPage()));
+                  },
+                  splashColor: mainBlack,
+                  child: Text(
+                    'Encontrar Personal Trainer',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
   }
 }

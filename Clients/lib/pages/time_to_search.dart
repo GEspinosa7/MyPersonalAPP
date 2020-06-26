@@ -8,7 +8,6 @@ class SearchStep extends StatefulWidget {
 }
 
 class _SearchStepPageState extends State<SearchStep> {
-  @override
 
   Widget build(BuildContext context) {
     return Scaffold(

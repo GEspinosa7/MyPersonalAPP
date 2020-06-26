@@ -1,5 +1,5 @@
 import 'package:MyPersonal/models/client_profile_model.dart';
-import 'package:MyPersonal/pages/time_to_search.dart';
+import 'package:MyPersonal/pages/home.dart';
 import 'package:MyPersonal/services/client_profile_service.dart';
 import 'package:MyPersonal/utils/colors.dart';
 import 'package:MyPersonal/validators/name_validator.dart';
@@ -188,7 +188,7 @@ class _ClientProfileRegisterState extends State<ClientProfileRegister> {
       try {
         final clientProfile = await _service.createClientProfile(_clientProfile);
         print(clientProfile.uid);
-        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => SearchStep()));
+        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomePage()));
       } catch (e) {
         print(e);
       }
