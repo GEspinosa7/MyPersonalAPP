@@ -2,10 +2,10 @@ import 'package:dio/dio.dart';
 
 import 'constants.dart';
 
-class HttpClient {
+class Http {
   static Dio _instance;
 
-  HttpClient._();
+  Http._();
 
   static Dio get instance {
     if (_instance == null) {

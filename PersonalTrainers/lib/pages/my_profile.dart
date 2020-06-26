@@ -118,7 +118,7 @@ class _MyProfileState extends State<MyProfile> {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: <Widget>[
                               Text(trainerProfile.timeActing, style: TextStyle(fontSize: 18),),
-                              Text(trainerProfile.birthDate, style: TextStyle(fontSize: 18),),
+                              Text(trainerProfile.birthDate.toString(), style: TextStyle(fontSize: 18),),
                             ],
                           )
                         ],

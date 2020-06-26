@@ -4,7 +4,7 @@ import 'package:my_personal_personaltrainer/models/trainer_model.dart';
 import 'package:my_personal_personaltrainer/utils/http.dart';
 
 class TrainerService {
-  final _dio = HttpClient.instance;
+  final _dio = Http.instance;
 
   Future<TrainerModel> createTrainerProfile(TrainerModel trainerProfile) async {
     final resp = await _dio.post('/trainers', data: trainerProfile.toJson());
