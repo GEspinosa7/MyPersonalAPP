@@ -19,48 +19,27 @@ class TrainingCreator extends StatefulWidget {
 
 class _TrainingCreatorState extends State<TrainingCreator> {
   final _form = GlobalKey<FormState>();
+  final _exform = GlobalKey<FormState>();
   final _auth = FirebaseAuth.instance;
 
   var _training = TrainingModel();
   final _trainingService = TrainingService();
   String _trainingKind = 'AB';
 
-  List<Exercises> _exercises = [];
-  final nameController = TextEditingController();
-  final timesController = TextEditingController();
-  final seriesController = TextEditingController();
-  final descriptionController = TextEditingController();
-  final equipmentController = TextEditingController();
+  List<Exercise> _exercises = [];
+  Exercise _newExercise = Exercise();
 
   void _addExercise() {
-    if (nameController.text.isEmpty) return;
-    setState(() => _exercises.add(Exercises(
-          name: nameController.text,
-        )));
-    nameController.text = 'Sem nome';
-    if (timesController.text.isEmpty) return;
-    setState(() => _exercises.add(Exercises(
-          times: timesController.text,
-        )));
-    timesController.text = 'Repetições não informadas';
-    if (seriesController.text.isEmpty) return;
-    setState(() => _exercises.add(Exercises(
-          series: seriesController.text,
-        )));
-    seriesController.text = 'Séries não informadas';
-    if (descriptionController.text.isEmpty) return;
-    setState(() => _exercises.add(Exercises(
-          description: descriptionController.text,
-        )));
-    descriptionController.text = 'Sem descrição';
-    if (equipmentController.text.isEmpty) return;
-    setState(() => _exercises.add(Exercises(
-          equipment: equipmentController.text,
-        )));
-    equipmentController.text = 'Sem equipamento';
+    if (_exform.currentState.validate()) {
+      _exform.currentState.save();
+      setState(() => _exercises.add(_newExercise));
+      _newExercise = Exercise();
+      _exform.currentState.reset();
+      Navigator.pop(context);
+    }
   }
 
-  void _removeExercise(Exercises exercise) {
+  void _removeExercise(Exercise exercise) {
     setState(() => _exercises.remove(exercise));
   }
 
@@ -284,76 +263,78 @@ class _TrainingCreatorState extends State<TrainingCreator> {
   }
 
   Widget get form {
-    return Container(
-      color: mainBlack,
-      child: SingleChildScrollView(
-        padding: EdgeInsets.all(20),
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Column(
-            children: <Widget>[
-              Text(
-                'Crie seu exercício',
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                    color: mainGreen),
-              ),
-              Divider(),
-              TextField(
-                  decoration: InputDecoration(
-                    labelText: 'Qual será o exercício?',
-                  ),
-                  textInputAction: TextInputAction.go,
-                  controller: nameController,
-                  onSubmitted: (value) => nameController),
-              TextField(
-                  decoration: InputDecoration(
-                    labelText: 'Deseja descrever o execício?',
-                  ),
-                  textInputAction: TextInputAction.go,
-                  controller: descriptionController,
-                  onSubmitted: (value) => descriptionController),
-              TextField(
-                  decoration: InputDecoration(
-                    labelText: 'Quantas repetições?',
-                  ),
-                  textInputAction: TextInputAction.go,
-                  controller: timesController,
-                  onSubmitted: (value) => timesController),
-              TextField(
-                  decoration: InputDecoration(
-                    labelText: 'Quantas séries?',
-                  ),
-                  textInputAction: TextInputAction.go,
-                  controller: seriesController,
-                  onSubmitted: (value) => seriesController),
-              TextField(
-                  decoration: InputDecoration(
-                    labelText: 'Qual será o equipamento utilizado?',
-                  ),
-                  textInputAction: TextInputAction.go,
-                  controller: equipmentController,
-                  onSubmitted: (value) => equipmentController),
-              Container(
-                margin: EdgeInsets.only(top: 20),
-                child: RaisedButton(
-                  color: mainGreen,
-                  onPressed: () {
-                    _addExercise();
-                    Navigator.pop(context);
-                  },
-                  splashColor: mainBlack,
-                  child: Text(
-                    'OK',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
+    return Form(
+      key: _exform,
+      child: Container(
+        color: mainBlack,
+        child: SingleChildScrollView(
+          padding: EdgeInsets.all(20),
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              children: <Widget>[
+                Text(
+                  'Crie seu exercício',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      color: mainGreen),
+                ),
+                Divider(),
+                TextFormField(
+                    decoration: InputDecoration(
+                      labelText: 'Qual será o exercício?',
+                    ),
+                    textInputAction: TextInputAction.go,
+                    // controller: nameController,
+                    onSaved: (value) => _newExercise.name = value),
+                TextFormField(
+                    decoration: InputDecoration(
+                      labelText: 'Deseja descrever o execício?',
+                    ),
+                    textInputAction: TextInputAction.go,
+                    // controller: descriptionController,
+                    onSaved: (value) => _newExercise.description = value),
+                TextFormField(
+                    decoration: InputDecoration(
+                      labelText: 'Quantas repetições?',
+                    ),
+                    textInputAction: TextInputAction.go,
+                    // controller: timesController,
+                    onSaved: (value) => _newExercise.times = value),
+                TextFormField(
+                    decoration: InputDecoration(
+                      labelText: 'Quantas séries?',
+                    ),
+                    textInputAction: TextInputAction.go,
+                    // controller: seriesController,
+                    onSaved: (value) => _newExercise.series = value),
+                TextFormField(
+                    decoration: InputDecoration(
+                      labelText: 'Qual será o equipamento utilizado?',
+                    ),
+                    textInputAction: TextInputAction.go,
+                    // controller: equipmentController,
+                    onSaved: (value) => _newExercise.equipment = value),
+                Container(
+                  margin: EdgeInsets.only(top: 20),
+                  child: RaisedButton(
+                    color: mainGreen,
+                    onPressed: () {
+                      _addExercise();
+                    },
+                    splashColor: mainBlack,
+                    child: Text(
+                      'OK',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -361,6 +342,7 @@ class _TrainingCreatorState extends State<TrainingCreator> {
   }
 
   _saveTraining() async {
+    _training.exercises = _exercises;
     _training.clientId = widget.clientId;
 
     if (_form.currentState.validate()) {

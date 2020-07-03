@@ -143,7 +143,7 @@ class _HomePageState extends State<HomePage> {
               onTap: () {
                 // Navigator.push(context, MaterialPageRoute(builder: (context) {return Agenda();}));
               },
-              child: homeActions(actionName: 'Agenda', provcolor: Colors.grey)),
+              child: homeActions(actionName: 'Agenda', provcolor: mainBlack)),
           GestureDetector(
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -151,9 +151,9 @@ class _HomePageState extends State<HomePage> {
                 }));
               },
               child: homeActions(actionName: 'Alunos', provcolor: mainBlack)),
-          homeActions(actionName: 'Treino'),
+          //homeActions(actionName: 'Treino', provcolor: Colors.grey),
           homeActions(actionName: 'Mensagens'),
-          homeActions(actionName: 'Portifólio'),
+          // homeActions(actionName: 'Portifólio'),
           GestureDetector(
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {

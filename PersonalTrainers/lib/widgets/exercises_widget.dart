@@ -3,8 +3,8 @@ import 'package:my_personal_personaltrainer/models/training_model.dart';
 import 'package:my_personal_personaltrainer/utils/colors.dart';
 
 class ExerciseWidget extends StatelessWidget {
-  final Exercises exercise;
-  final void Function(Exercises) onRemove;
+  final Exercise exercise;
+  final void Function(Exercise) onRemove;
 
   ExerciseWidget({Key key, this.exercise, this.onRemove}) : super(key: key);
 
