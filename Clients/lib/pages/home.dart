@@ -28,8 +28,8 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    _auth.currentUser().then((user) {
-      _loadClientProfile();
+    _auth.currentUser().then((user) async {
+      await _loadClientProfile();
       _loadContract();
     });
   }
@@ -43,7 +43,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   _loadContract() async {
-    final resp = await contractService.getContract();
+    final _clientUser = await _auth.currentUser();
+    final resp = await contractService.getContract(_clientUser.uid);
     setState(() {
       contract = resp;
     });
@@ -137,6 +138,7 @@ class _HomePageState extends State<HomePage> {
                     title: Text('Ajuda'),
                     onTap: () {
                       print(clientProfile.uid);
+                      print(clientProfile.id);
                       // Navigator.push(context, MaterialPageRoute(builder: (context) {return SearchStep();}));
                     },
                   ),
@@ -202,45 +204,45 @@ class _HomePageState extends State<HomePage> {
       )),
     );
   }
-}
 
-Widget search() {
-  return Center(
-    child: Container(
-      margin: EdgeInsets.all(20),
-      height: 200,
-      decoration: BoxDecoration(
-        color: mainGreen,
-        border: Border.all(color: mainGreen),
-        borderRadius: const BorderRadius.all(const Radius.circular(15)),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          Container(
-              margin: EdgeInsets.only(bottom: 10),
+  Widget search() {
+    return Center(
+      child: Container(
+        margin: EdgeInsets.all(20),
+        height: 200,
+        decoration: BoxDecoration(
+          color: mainGreen,
+          border: Border.all(color: mainGreen),
+          borderRadius: const BorderRadius.all(const Radius.circular(15)),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Container(
+                margin: EdgeInsets.only(bottom: 10),
+                child: Text(
+                  'Voce ainda não tem um personal trainer',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                )),
+            RaisedButton(
+              color: Colors.transparent,
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => TrainerListPage()));
+              },
+              splashColor: mainBlack,
               child: Text(
-                'Voce ainda não tem um personal trainer',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-              )),
-          RaisedButton(
-            color: Colors.transparent,
-            onPressed: () {
-              // Navigator.of(context).pushReplacement(
-              //     MaterialPageRoute(builder: (context) => TrainerListPage()));
-            },
-            splashColor: mainBlack,
-            child: Text(
-              'Encontrar Personal Trainer',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 20,
+                "Econtrar",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
-    ),
-  );
+    );
+  }
 }

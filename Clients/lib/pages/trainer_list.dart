@@ -18,18 +18,19 @@ class _TrainerListPageState extends State<TrainerListPage> {
   ClientModel clientProfile;
   final cservice = ClientService();
   final _auth = FirebaseAuth.instance;
-   List<TrainerModel> _trainers = [];
+  List<TrainerModel> _trainers = [];
   final service = TrainerService();
 
   @override
   void initState() {
     super.initState();
-      _auth.currentUser().then((user) {
-        _loadClientProfile();
-        _loadTrainers();
-      });
+    _auth.currentUser().then((user) {
+      _loadClientProfile();
+      _loadTrainers();
+    });
   }
-    _loadClientProfile() async {
+
+  _loadClientProfile() async {
     final _clientUser = await _auth.currentUser();
     final resp = await cservice.getClientProfile(_clientUser.uid);
     setState(() {
@@ -37,8 +38,9 @@ class _TrainerListPageState extends State<TrainerListPage> {
     });
   }
 
- _loadTrainers() async {
-    final list = await service.getTrainers();
+  _loadTrainers() async {
+    final _clientUser = await _auth.currentUser();
+    final list = await service.getTrainers(_clientUser.uid);
     setState(() {
       _trainers = list;
     });
@@ -48,29 +50,31 @@ class _TrainerListPageState extends State<TrainerListPage> {
     Navigator.of(context).push(MaterialPageRoute(builder: (context) {
       return TrainerProfile(
         trainer: trainer,
+        client: clientProfile,
       );
     }));
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar (
+      appBar: AppBar(
           title: Text('Personais Cadastrados', textAlign: TextAlign.center),
           centerTitle: true,
-          backgroundColor: mainBlack
-      ),
+          backgroundColor: mainBlack),
       backgroundColor: mainGreen,
-      body: _trainers == null ? normalLoad() :Container(
-        child: ListView(
-          children: _trainers.map((t) {
-            return TrainerCard(
-                trainer: t,
-                clickCard: () => _goToTrainerProfile(t),
-            );
-          }).toList(),
-        ),
-      ),
+      body: _trainers == null
+          ? normalLoad()
+          : Container(
+              child: ListView(
+                children: _trainers.map((t) {
+                  return TrainerCard(
+                    trainer: t,
+                    clickCard: () => _goToTrainerProfile(t),
+                  );
+                }).toList(),
+              ),
+            ),
     );
   }
 }

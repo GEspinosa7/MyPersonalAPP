@@ -88,18 +88,20 @@ class _CreatePageState extends State<CreatePage> {
   }
 
   _creating() async {
-    _formKey.currentState.save();
-
-    try {
-      await _auth.createUserWithEmailAndPassword(
-          email: _email, password: _password);
-      Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => ClientProfileRegister()));
-    } catch (e) {
-      print(e);
+    if (_formKey.currentState.validate()) {
+      _formKey.currentState.save();
+      try {
+        final authResult = await _auth.createUserWithEmailAndPassword(
+            email: _email, password: _password);
+        print(authResult);
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => ClientProfileRegister()));
+      } catch (e) {
+        print(e);
+      }
+      print(_email);
+      print(_password);
     }
-    print(_email);
-    print(_password);
   }
 
   _gotoLogin() async {
