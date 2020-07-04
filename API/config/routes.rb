@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :ratings
   resources :contracts
   resources :trainings
 	scope :defaults => { :format => 'application/json' } do
