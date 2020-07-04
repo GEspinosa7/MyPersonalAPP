@@ -18,18 +18,19 @@ class _ClientListPageState extends State<ClientListPage> {
   TrainerModel trainerProfile;
   final tservice = TrainerService();
   final _auth = FirebaseAuth.instance;
-   List<ClientModel> _clients = [];
+  List<ClientModel> _clients = [];
   final service = ClientService();
 
   @override
   void initState() {
     super.initState();
-      _auth.currentUser().then((user) {
-        _loadTrainerProfile();
-        _loadClients();
-      });
+    _auth.currentUser().then((user) {
+      _loadTrainerProfile();
+      _loadClients();
+    });
   }
-    _loadTrainerProfile() async {
+
+  _loadTrainerProfile() async {
     final _trainerUser = await _auth.currentUser();
     final resp = await tservice.getTrainerProfile(_trainerUser.uid);
     setState(() {
@@ -37,7 +38,7 @@ class _ClientListPageState extends State<ClientListPage> {
     });
   }
 
- _loadClients() async {
+  _loadClients() async {
     final list = await service.getClients();
     setState(() {
       _clients = list;
@@ -51,27 +52,26 @@ class _ClientListPageState extends State<ClientListPage> {
       );
     }));
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar (
-          title: Text('Meus Alunos', textAlign: TextAlign.center),
-          centerTitle: true,
-          backgroundColor: mainGreen
-
-      ),
-      backgroundColor: mainBlack,
-      body: _clients == null ? normalLoad() :Container(
-        child: ListView(
-          children: _clients.map((c) {
-            return ClientCard(
-                client: c,
-                clickCard: () => _goToClientProfile(c),
-            );
-          }).toList(),
-        ),
-      ),
-    );
+        appBar: AppBar(
+            title: Text('Meus Alunos', textAlign: TextAlign.center),
+            centerTitle: true,
+            backgroundColor: mainGreen),
+        backgroundColor: mainBlack,
+        body: _clients == null
+            ? Text('Não há clientes')
+            : Container(
+                child: ListView(
+                  children: _clients.map((c) {
+                    return ClientCard(
+                      client: c,
+                      clickCard: () => _goToClientProfile(c),
+                    );
+                  }).toList(),
+                ),
+              ));
   }
 }

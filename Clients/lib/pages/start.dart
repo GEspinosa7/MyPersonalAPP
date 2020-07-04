@@ -6,7 +6,6 @@ import 'package:MyPersonal/utils/load_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-
 import 'client_profile_register.dart';
 
 class StartPage extends StatefulWidget {

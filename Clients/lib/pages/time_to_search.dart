@@ -8,48 +8,47 @@ class SearchStep extends StatefulWidget {
 }
 
 class _SearchStepPageState extends State<SearchStep> {
-
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: mainBlack,
-        body: Center(
-          child: Container(
-            margin: EdgeInsets.all(20),
-            height: 200,
-            decoration: BoxDecoration(
-              color: mainGreen,
-              border: Border.all(color: mainGreen),
-              borderRadius: const BorderRadius.all(const Radius.circular(15)),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                Container(
+      backgroundColor: mainBlack,
+      body: Center(
+        child: Container(
+          margin: EdgeInsets.all(20),
+          height: 200,
+          decoration: BoxDecoration(
+            color: mainGreen,
+            border: Border.all(color: mainGreen),
+            borderRadius: const BorderRadius.all(const Radius.circular(15)),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              Container(
                   margin: EdgeInsets.only(bottom: 10),
                   child: Text(
                     'Agora está na hora de você encontrar seu Personal Trainer',
-                    textAlign: TextAlign.center, 
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),)
-                ),
-                
-                RaisedButton(
-                  color: Colors.transparent,
-                  onPressed: (){
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => TrainerListPage()));
-                  },
-                  splashColor: mainBlack,
-                  child: Text(
-                    'Vamos Lá',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                    ),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  )),
+              RaisedButton(
+                color: Colors.transparent,
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => TrainerListPage()));
+                },
+                splashColor: mainBlack,
+                child: Text(
+                  'Vamos Lá',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
+      ),
     );
   }
 }

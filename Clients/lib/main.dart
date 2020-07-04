@@ -13,6 +13,6 @@ class MyPersonal extends StatelessWidget {
       theme: ThemeData.dark().copyWith(scaffoldBackgroundColor: mainBlack),
       debugShowCheckedModeBanner: false,
       home: StartPage(),
-      );
+    );
   }
 }
