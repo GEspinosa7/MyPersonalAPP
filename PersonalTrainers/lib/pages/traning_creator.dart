@@ -1,5 +1,4 @@
 import 'package:dropdown_formfield/dropdown_formfield.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:my_personal_personaltrainer/models/training_model.dart';
 import 'package:my_personal_personaltrainer/services/training_service.dart';
@@ -20,7 +19,6 @@ class TrainingCreator extends StatefulWidget {
 class _TrainingCreatorState extends State<TrainingCreator> {
   final _form = GlobalKey<FormState>();
   final _exform = GlobalKey<FormState>();
-  final _auth = FirebaseAuth.instance;
 
   var _training = TrainingModel();
   final _trainingService = TrainingService();
@@ -286,35 +284,30 @@ class _TrainingCreatorState extends State<TrainingCreator> {
                       labelText: 'Qual será o exercício?',
                     ),
                     textInputAction: TextInputAction.go,
-                    // controller: nameController,
                     onSaved: (value) => _newExercise.name = value),
                 TextFormField(
                     decoration: InputDecoration(
                       labelText: 'Deseja descrever o execício?',
                     ),
                     textInputAction: TextInputAction.go,
-                    // controller: descriptionController,
                     onSaved: (value) => _newExercise.description = value),
                 TextFormField(
                     decoration: InputDecoration(
                       labelText: 'Quantas repetições?',
                     ),
                     textInputAction: TextInputAction.go,
-                    // controller: timesController,
                     onSaved: (value) => _newExercise.times = value),
                 TextFormField(
                     decoration: InputDecoration(
                       labelText: 'Quantas séries?',
                     ),
                     textInputAction: TextInputAction.go,
-                    // controller: seriesController,
                     onSaved: (value) => _newExercise.series = value),
                 TextFormField(
                     decoration: InputDecoration(
                       labelText: 'Qual será o equipamento utilizado?',
                     ),
                     textInputAction: TextInputAction.go,
-                    // controller: equipmentController,
                     onSaved: (value) => _newExercise.equipment = value),
                 Container(
                   margin: EdgeInsets.only(top: 20),
@@ -349,7 +342,6 @@ class _TrainingCreatorState extends State<TrainingCreator> {
       _form.currentState.save();
       try {
         final training = await _trainingService.createTraining(_training);
-        // print(_client.uid);
         print(training.id);
         print("Treinador:");
         print(training.trainerId);

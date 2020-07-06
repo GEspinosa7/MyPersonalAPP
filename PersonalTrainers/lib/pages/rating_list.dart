@@ -1,31 +1,31 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:my_personal_personaltrainer/components/client_card.dart';
-import 'package:my_personal_personaltrainer/models/client_model.dart';
+import 'package:my_personal_personaltrainer/components/rating_card.dart';
+import 'package:my_personal_personaltrainer/models/rating_model.dart';
 import 'package:my_personal_personaltrainer/models/trainer_model.dart';
-import 'package:my_personal_personaltrainer/pages/my_client.dart';
-import 'package:my_personal_personaltrainer/services/client_service.dart';
+import 'package:my_personal_personaltrainer/pages/full_rating.dart';
+import 'package:my_personal_personaltrainer/services/rating_service.dart';
 import 'package:my_personal_personaltrainer/services/trainer_service.dart';
 import 'package:my_personal_personaltrainer/utils/colors.dart';
 
-class ClientListPage extends StatefulWidget {
+class RatingListPage extends StatefulWidget {
   @override
-  _ClientListPageState createState() => _ClientListPageState();
+  _RatingListPageState createState() => _RatingListPageState();
 }
 
-class _ClientListPageState extends State<ClientListPage> {
+class _RatingListPageState extends State<RatingListPage> {
   TrainerModel trainerProfile;
   final tservice = TrainerService();
   final _auth = FirebaseAuth.instance;
-  List<ClientModel> _clients = [];
-  final service = ClientService();
+  List<RatingModel> _ratings = [];
+  final rservice = RatingService();
 
   @override
   void initState() {
     super.initState();
-    _auth.currentUser().then((user) {
-      _loadTrainerProfile();
-      _loadClients();
+    _auth.currentUser().then((user) async {
+      await _loadTrainerProfile();
+      _loadRatings();
     });
   }
 
@@ -37,17 +37,17 @@ class _ClientListPageState extends State<ClientListPage> {
     });
   }
 
-  _loadClients() async {
-    final list = await service.getClients();
+  _loadRatings() async {
+    final list = await rservice.getRatings(trainerProfile.uid);
     setState(() {
-      _clients = list;
+      _ratings = list;
     });
   }
 
-  _goToClientProfile(ClientModel client) {
+  _goToFullRating(RatingModel rating) {
     Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-      return MyClientProfile(
-        client: client,
+      return FullRatingPage(
+        rating: rating,
       );
     }));
   }
@@ -56,18 +56,18 @@ class _ClientListPageState extends State<ClientListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            title: Text('Meus Alunos', textAlign: TextAlign.center),
+            title: Text('Minhas Avaliações', textAlign: TextAlign.center),
             centerTitle: true,
             backgroundColor: mainGreen),
         backgroundColor: mainBlack,
-        body: _clients == null
-            ? Text('Não há clientes')
+        body: _ratings == null
+            ? Text('Não há ratinges')
             : Container(
                 child: ListView(
-                  children: _clients.map((c) {
-                    return ClientCard(
-                      client: c,
-                      clickCard: () => _goToClientProfile(c),
+                  children: _ratings.map((r) {
+                    return RatingCard(
+                      rating: r,
+                      clickCard: () => _goToFullRating(r),
                     );
                   }).toList(),
                 ),

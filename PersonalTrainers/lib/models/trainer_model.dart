@@ -48,8 +48,6 @@ class TrainerModel {
     data['availability'] = this.availability;
     data['price'] = this.price;
     data['uid'] = this.uid;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
     return data;
   }
 }

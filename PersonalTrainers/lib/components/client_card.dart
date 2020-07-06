@@ -12,40 +12,39 @@ class ClientCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: clickCard,
-      child: Container (
+      child: Container(
         margin: EdgeInsets.fromLTRB(10, 20, 10, 5),
-        height: 100,
+        padding: EdgeInsets.fromLTRB(20, 20, 40, 20),
+        height: 120,
         width: double.infinity,
         decoration: BoxDecoration(
-          color: mainGreen,
+          color: mainBlack,
           border: Border.all(color: Colors.white),
-          borderRadius: const BorderRadius.all(const Radius.circular(15)),
+          borderRadius: const BorderRadius.all(const Radius.circular(30)),
         ),
-            child: Row (
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
-                    height: 90,
-                    width: 90,
-                    margin: EdgeInsets.only(right: 40),
-                    decoration:
-                      BoxDecoration(
-                        border: Border.all(color: Colors.white),
-                        borderRadius: const BorderRadius.all(const Radius.circular(100)),
-                      ), 
-                    child: Center (
-                        child: ClipRRect(
-                          borderRadius: const BorderRadius.all(const Radius.circular(100)),
-                          // child: Image.network(client['profile_picture'], width: 70, height: 70))
-                          child: Icon(Icons.person)
-                        )
-                    )
-                  ),
-                  Text(client.name + ' ' + client.lastname, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),)
-                ]
-            ),
+        child:
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+          Container(
+              width: 80,
+              height: 80,
+              decoration: BoxDecoration(
+                color: mainBlack,
+                border: Border.all(color: mainGreen),
+                borderRadius:
+                    const BorderRadius.all(const Radius.circular(100)),
+              ),
+              child: Center(child: Icon(Icons.person)
+                  // ClipRRect(
+                  //   borderRadius: const BorderRadius.all(const Radius.circular(100)),
+                  //   child: Image.asset('assets/img/indice.jpeg', width: 80, height: 80)
+                  // )
+                  )),
+          Text(
+            client.name + ' ' + client.lastname,
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          )
+        ]),
       ),
     );
-    
   }
 }

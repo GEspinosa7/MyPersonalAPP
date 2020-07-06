@@ -7,6 +7,7 @@ import 'package:my_personal_personaltrainer/pages/client_list.dart';
 import 'package:my_personal_personaltrainer/pages/configurations.dart';
 import 'package:my_personal_personaltrainer/pages/my_profile.dart';
 import 'package:my_personal_personaltrainer/pages/profile_configurations.dart';
+import 'package:my_personal_personaltrainer/pages/rating_list.dart';
 import 'package:my_personal_personaltrainer/pages/start.dart';
 import 'package:my_personal_personaltrainer/services/trainer_service.dart';
 import 'package:my_personal_personaltrainer/utils/colors.dart';
@@ -141,9 +142,13 @@ class _HomePageState extends State<HomePage> {
         children: <Widget>[
           GestureDetector(
               onTap: () {
-                // Navigator.push(context, MaterialPageRoute(builder: (context) {return Agenda();}));
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return RatingListPage();
+                }));
               },
-              child: homeActions(actionName: 'Agenda', provcolor: mainBlack)),
+              child:
+                  homeActions(actionName: 'Avaliações', provcolor: mainBlack)),
+
           GestureDetector(
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -152,16 +157,13 @@ class _HomePageState extends State<HomePage> {
               },
               child: homeActions(actionName: 'Alunos', provcolor: mainBlack)),
           //homeActions(actionName: 'Treino', provcolor: Colors.grey),
-          homeActions(actionName: 'Mensagens'),
+          // homeActions(actionName: 'Mensagens'),
+          // GestureDetector(
+          //     onTap: () {
+          //       // Navigator.push(context, MaterialPageRoute(builder: (context) {return Agenda();}));
+          //     },
+          //     child: homeActions(actionName: 'Agenda', provcolor: Colors.grey)),
           // homeActions(actionName: 'Portifólio'),
-          GestureDetector(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return AvaliationsArea();
-                }));
-              },
-              child: homeActions(
-                  actionName: 'Avaliações', provcolor: Colors.grey)),
         ],
       ),
     );

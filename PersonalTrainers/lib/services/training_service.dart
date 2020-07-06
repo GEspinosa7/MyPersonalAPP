@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:my_personal_personaltrainer/models/training_model.dart';
 
 import '../utils/http.dart';
@@ -11,8 +12,9 @@ class TrainingService {
     return TrainingModel.fromJson(resp.data);
   }
 
-  Future<TrainingModel> getTraining() async {
-    final resp = await _dio.get('/trainings');
+  Future<TrainingModel> getTraining(String uid) async {
+    final resp =
+        await _dio.get('/trainings', options: Options(headers: {'token': uid}));
 
     if (resp.data.length > 0)
       return TrainingModel.fromJson(resp.data[0]);

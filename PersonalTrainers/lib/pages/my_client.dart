@@ -1,7 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:my_personal_personaltrainer/models/client_model.dart';
+import 'package:my_personal_personaltrainer/models/training_model.dart';
 import 'package:my_personal_personaltrainer/pages/traning_creator.dart';
 import 'package:my_personal_personaltrainer/services/client_service.dart';
+import 'package:my_personal_personaltrainer/services/training_service.dart';
 import 'package:my_personal_personaltrainer/utils/colors.dart';
 
 class MyClientProfile extends StatefulWidget {
@@ -15,6 +18,8 @@ class MyClientProfile extends StatefulWidget {
 
 class _MyClientProfileState extends State<MyClientProfile> {
   final service = ClientService();
+  final tservice = TrainingService();
+  TrainingModel training;
 
   _goToTrainingCreator() {
     Navigator.of(context).push(MaterialPageRoute(builder: (context) {
@@ -67,18 +72,18 @@ class _MyClientProfileState extends State<MyClientProfile> {
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                     ),
-                    RaisedButton(
-                      color: Colors.transparent,
-                      onPressed: () => null,
-                      splashColor: Colors.blueGrey,
-                      child: Text(
-                        'Mensagem',
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 20,
-                        ),
-                      ),
-                    ),
+                    // RaisedButton(
+                    //   color: Colors.transparent,
+                    //   onPressed: () => null,
+                    //   splashColor: Colors.blueGrey,
+                    //   child: Text(
+                    //     'Mensagem',
+                    //     style: TextStyle(
+                    //       color: Colors.grey,
+                    //       fontSize: 20,
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
@@ -152,6 +157,41 @@ class _MyClientProfileState extends State<MyClientProfile> {
                           ],
                         ))
                   ])),
+              // Container(
+              //     width: double.infinity,
+              //     margin: EdgeInsets.all(10),
+              //     padding: EdgeInsets.all(10),
+              //     decoration: BoxDecoration(
+              //       color: mainGreen,
+              //       border: Border.all(color: Colors.black),
+              //       borderRadius:
+              //           const BorderRadius.all(const Radius.circular(15)),
+              //     ),
+              //     child: Column(
+              //       crossAxisAlignment: CrossAxisAlignment.center,
+              //       mainAxisAlignment: MainAxisAlignment.spaceAround,
+              //       children: <Widget>[
+              //         Text(
+              //           'Status do Treino',
+              //           style: TextStyle(
+              //               fontSize: 18, fontWeight: FontWeight.bold),
+              //         ),
+              //         Divider(),
+              //         Container(
+              //             child: Text(
+              //           'sem treino',
+              //           style: TextStyle(fontSize: 15),
+              //         ))
+              //       ],
+              //     )),
+              Divider(),
+              Text(
+                'Dados Físicos',
+                style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+              ),
               Container(
                   width: double.infinity,
                   margin: EdgeInsets.all(10),
@@ -162,24 +202,77 @@ class _MyClientProfileState extends State<MyClientProfile> {
                     borderRadius:
                         const BorderRadius.all(const Radius.circular(15)),
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
-                      Text(
-                        'Treino Atual',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: <Widget>[
+                          Text(
+                            'Tempo de Ativo',
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: mainBlack,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            'Idade',
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: mainBlack,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            'Peso',
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: mainBlack,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            'Altura',
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: mainBlack,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
                       ),
-                      Divider(),
-                      Container(
-                          child: Text(
-                        'sem treino',
-                        style: TextStyle(fontSize: 15),
-                      ))
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: <Widget>[
+                          Text(
+                            widget.client.timeActive.toString(),
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: mainBlack,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            widget.client.birthDate.toString(),
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: mainBlack,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            widget.client.weight.toString(),
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: mainBlack,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            widget.client.height.toString(),
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: mainBlack,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      )
                     ],
                   )),
-              Divider(),
               Container(
                 margin: EdgeInsets.fromLTRB(10, 10, 10, 50),
                 child: RaisedButton(
@@ -197,40 +290,40 @@ class _MyClientProfileState extends State<MyClientProfile> {
                   ),
                 ),
               ),
-              Container(
-                margin: EdgeInsets.all(5),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                    RaisedButton(
-                      color: Colors.blueGrey[50],
-                      onPressed: () {
-                        // _goToTrainingCreator();
-                      },
-                      splashColor: Colors.red[50],
-                      child: Text(
-                        'Cancelar Serviços',
-                        style: TextStyle(
-                          color: mainBlack,
-                          fontSize: 20,
-                        ),
-                      ),
-                    ),
-                    RaisedButton(
-                      color: mainBlack,
-                      onPressed: () => null,
-                      splashColor: Colors.red,
-                      child: Text(
-                        'Denunciar',
-                        style: TextStyle(
-                          color: Colors.red,
-                          fontSize: 20,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              // Container(
+              //   margin: EdgeInsets.all(5),
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+              //     children: <Widget>[
+              //       RaisedButton(
+              //         color: Colors.blueGrey[50],
+              //         onPressed: () {
+              //           // _goToTrainingCreator();
+              //         },
+              //         splashColor: Colors.red[50],
+              //         child: Text(
+              //           'Cancelar Serviços',
+              //           style: TextStyle(
+              //             color: mainBlack,
+              //             fontSize: 20,
+              //           ),
+              //         ),
+              //       ),
+              //       RaisedButton(
+              //         color: mainBlack,
+              //         onPressed: () => null,
+              //         splashColor: Colors.red,
+              //         child: Text(
+              //           'Denunciar',
+              //           style: TextStyle(
+              //             color: Colors.red,
+              //             fontSize: 20,
+              //           ),
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
             ],
           ),
         ),
