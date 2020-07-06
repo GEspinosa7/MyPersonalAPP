@@ -13,7 +13,7 @@ class TrainersController < ApplicationController
 
   # GET /trainers/me
   def me
-    render json: @trainer
+    render json: @trainer.to_json(include: :ratings)
   end
 
   # POST /trainers

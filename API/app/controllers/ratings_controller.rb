@@ -5,7 +5,7 @@ class RatingsController < ApplicationController
   def index
     authenticate_user!
 
-    @ratings = current_trainer.ratings
+    @ratings = current_user.ratings
 
     render json: @ratings.to_json(include: [:client, :trainer])
   end
@@ -20,7 +20,6 @@ class RatingsController < ApplicationController
   # POST /ratings
   def create
     authenticate_client!
-
     @rating = Rating.new(rating_params)
 
     if @rating.save
@@ -47,11 +46,11 @@ class RatingsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_rating
-      @rating = current_trainer.ratings.find(params[:id])
+      @rating = current_user.ratings.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
     def rating_params
-      params.require(:rating).permit(:trainer_id, :rating_date, :rating_value).merge(client: current_client)
+      params.require(:rating).permit(:trainer_id, :rating_date, :rating_value, :text_rating, :full_rating).merge(client: current_client)
     end
 end
