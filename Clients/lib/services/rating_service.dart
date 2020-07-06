@@ -12,6 +12,14 @@ class RatingService {
     return RatingModel.fromJson(resp.data);
   }
 
+  Future<List<RatingModel>> getRatings(String uid) async {
+    final resp =
+        await _dio.get('/ratings', options: Options(headers: {'token': uid}));
+
+    return List<RatingModel>.from(
+        resp.data.map((r) => RatingModel.fromJson(r)));
+  }
+
   Future<RatingModel> getRating(String uid) async {
     final resp =
         await _dio.get('/ratings', options: Options(headers: {'token': uid}));

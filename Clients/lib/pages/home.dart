@@ -10,6 +10,7 @@ import 'configurations.dart';
 import 'package:MyPersonal/utils/colors.dart';
 import 'package:MyPersonal/utils/load_screen.dart';
 import 'my_personal_trainer_profile.dart';
+import 'my_profile.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -76,7 +77,10 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           GestureDetector(
                             onTap: () {
-                              // Navigator.push(context, MaterialPageRoute(builder: (context) {return MyProfile();}));
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return MyProfile();
+                              }));
                             },
                             child: Container(
                                 width: 100,
@@ -104,16 +108,24 @@ class _HomePageState extends State<HomePage> {
                   ListTile(
                     title: Text('Meu Perfil'),
                     onTap: () {
-                      // Navigator.push(context, MaterialPageRoute(builder: (context) {return MyProfile();}));
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return MyProfile();
+                      }));
                     },
                   ),
                   ListTile(
                     title: Text('Meu Personal'),
                     onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return MyTainerProfile();
-                      }));
+                      contract == null
+                          ? Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                              return TrainerListPage();
+                            }))
+                          : Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                              return MyTainerProfile();
+                            }));
                     },
                   ),
                   ListTile(
@@ -125,23 +137,20 @@ class _HomePageState extends State<HomePage> {
                       }));
                     },
                   ),
-                  ListTile(
-                    title: Text('Pagamento'),
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return TrainerListPage();
-                      }));
-                    },
-                  ),
-                  ListTile(
-                    title: Text('Ajuda'),
-                    onTap: () {
-                      print(clientProfile.uid);
-                      print(clientProfile.id);
-                      // Navigator.push(context, MaterialPageRoute(builder: (context) {return SearchStep();}));
-                    },
-                  ),
+                  // ListTile(
+                  //   title: Text('Pagamento'),
+                  //   onTap: () {
+                  //     print(clientProfile.id);
+                  //   },
+                  // ),
+                  // ListTile(
+                  //   title: Text('Ajuda'),
+                  //   onTap: () {
+                  //     print(clientProfile.uid);
+                  //     print(clientProfile.id);
+                  //     // Navigator.push(context, MaterialPageRoute(builder: (context) {return SearchStep();}));
+                  //   },
+                  // ),
                 ],
               ),
             )));
@@ -172,8 +181,8 @@ class _HomePageState extends State<HomePage> {
               },
               child:
                   homeActions(actionName: 'Meu Treino', provcolor: mainGreen)),
-          homeActions(actionName: 'Mensagens'),
-          homeActions(actionName: 'Evolução'),
+          // homeActions(actionName: 'Mensagens'),
+          // homeActions(actionName: 'Evolução'),
           GestureDetector(
             onTap: () {
               // Navigator.push(context, MaterialPageRoute(builder: (context) {

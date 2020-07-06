@@ -8,7 +8,7 @@ class TrainingModel {
   String updatedAt;
   int clientId;
   int trainerId;
-  List<Exercises> exercises;
+  List<Exercise> exercises;
 
   TrainingModel(
       {this.id,
@@ -33,9 +33,9 @@ class TrainingModel {
     clientId = json['client_id'];
     trainerId = json['trainer_id'];
     if (json['exercises'] != null) {
-      exercises = new List<Exercises>();
+      exercises = new List<Exercise>();
       json['exercises'].forEach((v) {
-        exercises.add(new Exercises.fromJson(v));
+        exercises.add(new Exercise.fromJson(v));
       });
     }
   }
@@ -55,7 +55,7 @@ class TrainingModel {
   }
 }
 
-class Exercises {
+class Exercise {
   int id;
   String name;
   String description;
@@ -66,7 +66,7 @@ class Exercises {
   String updatedAt;
   int series;
 
-  Exercises(
+  Exercise(
       {this.id,
       this.name,
       this.description,
@@ -77,7 +77,7 @@ class Exercises {
       this.updatedAt,
       this.series});
 
-  Exercises.fromJson(Map<String, dynamic> json) {
+  Exercise.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     description = json['description'];

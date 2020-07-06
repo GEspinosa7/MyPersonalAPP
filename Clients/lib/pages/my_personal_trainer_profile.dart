@@ -4,6 +4,7 @@ import 'package:MyPersonal/utils/colors.dart';
 import 'package:MyPersonal/utils/load_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:MyPersonal/pages/rating_area.dart';
 
 class MyTainerProfile extends StatefulWidget {
   @override
@@ -27,6 +28,15 @@ class _MyTainerProfileState extends State<MyTainerProfile> {
     setState(() {
       contract = resp;
     });
+  }
+
+  _goToRatingArea() {
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+      return RatingArea(
+        trainerId: contract.trainerId,
+        clientUid: contract.client.uid,
+      );
+    }));
   }
 
   @override
@@ -74,18 +84,18 @@ class _MyTainerProfileState extends State<MyTainerProfile> {
                                   fontSize: 20, fontWeight: FontWeight.bold),
                             ),
                           ),
-                          RaisedButton(
-                            color: Colors.transparent,
-                            onPressed: () => null,
-                            splashColor: Colors.blueGrey,
-                            child: Text(
-                              'Mensagem',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 20,
-                              ),
-                            ),
-                          ),
+                          // RaisedButton(
+                          //   color: Colors.transparent,
+                          //   onPressed: () => null,
+                          //   splashColor: Colors.blueGrey,
+                          //   child: Text(
+                          //     'Mensagem',
+                          //     style: TextStyle(
+                          //       color: Colors.black,
+                          //       fontSize: 20,
+                          //     ),
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),
@@ -194,7 +204,9 @@ class _MyTainerProfileState extends State<MyTainerProfile> {
                       margin: EdgeInsets.fromLTRB(10, 10, 10, 50),
                       child: RaisedButton(
                         color: Colors.yellow[200],
-                        onPressed: () => null,
+                        onPressed: () {
+                          _goToRatingArea();
+                        },
                         splashColor: Colors.grey[50],
                         child: Text(
                           'Avaliar',
@@ -205,40 +217,42 @@ class _MyTainerProfileState extends State<MyTainerProfile> {
                         ),
                       ),
                     ),
-                    Container(
-                      margin: EdgeInsets.all(5),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: <Widget>[
-                          RaisedButton(
-                            color: Colors.blueGrey[50],
-                            onPressed: () {
-                              // _goToContractingPage();
-                            },
-                            splashColor: Colors.red[50],
-                            child: Text(
-                              'Cancelar Serviços',
-                              style: TextStyle(
-                                color: mainBlack,
-                                fontSize: 20,
-                              ),
-                            ),
-                          ),
-                          RaisedButton(
-                            color: mainBlack,
-                            onPressed: () => null,
-                            splashColor: Colors.red,
-                            child: Text(
-                              'Denunciar',
-                              style: TextStyle(
-                                color: Colors.red,
-                                fontSize: 20,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    // Container(
+                    //   margin: EdgeInsets.all(5),
+                    //   child: Row(
+                    //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    //     children: <Widget>[
+                    //       RaisedButton(
+                    //         color: Colors.blueGrey[50],
+                    //         onPressed: () {
+                    //           // _goToContractingPage();
+                    //         },
+                    //         splashColor: Colors.red[50],
+                    //         child: Text(
+                    //           'Cancelar Serviços',
+                    //           style: TextStyle(
+                    //             color: mainBlack,
+                    //             fontSize: 20,
+                    //           ),
+                    //         ),
+                    //       ),
+                    //       RaisedButton(
+                    //         color: mainBlack,
+                    //         onPressed: () {
+                    //           print(contract.trainer.uid);
+                    //         },
+                    //         splashColor: Colors.red,
+                    //         child: Text(
+                    //           'Denunciar',
+                    //           style: TextStyle(
+                    //             color: Colors.red,
+                    //             fontSize: 20,
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
                   ],
                 ),
               ),

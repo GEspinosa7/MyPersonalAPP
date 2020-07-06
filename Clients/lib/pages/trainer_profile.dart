@@ -1,6 +1,9 @@
 import 'package:MyPersonal/models/client_profile_model.dart';
+import 'package:MyPersonal/models/rating_model.dart';
 import 'package:MyPersonal/models/trainer_model.dart';
 import 'package:MyPersonal/pages/contract.dart';
+import 'package:MyPersonal/pages/ratings_list.dart';
+import 'package:MyPersonal/services/rating_service.dart';
 import 'package:MyPersonal/services/trainer_service.dart';
 import 'package:MyPersonal/utils/colors.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +22,22 @@ class TrainerProfile extends StatefulWidget {
 
 class _TrainerProfileState extends State<TrainerProfile> {
   final service = TrainerService();
+  List<RatingModel> _ratings = [];
+  final rservice = RatingService();
+
+  @override
+  void initState() {
+    super.initState();
+    _loadRatings();
+  }
+
+  _loadRatings() async {
+    final _trainer = widget.trainer;
+    final list = await rservice.getRatings(_trainer.uid);
+    setState(() {
+      _ratings = list;
+    });
+  }
 
   _goToContractingPage() {
     Navigator.of(context).push(MaterialPageRoute(builder: (context) {
@@ -29,17 +48,23 @@ class _TrainerProfileState extends State<TrainerProfile> {
     }));
   }
 
+  _goToRatingsListPage() {
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+      return RatingsList(
+        trainer: widget.trainer,
+      );
+    }));
+  }
+
   @override
   Widget build(BuildContext context) {
-    var rating = 0.0;
-
     return Scaffold(
-      backgroundColor: mainBlack,
+      backgroundColor: mainGreen,
       appBar: AppBar(
         title: Text('${widget.trainer.name} ${widget.trainer.lastname}',
             textAlign: TextAlign.center),
         centerTitle: true,
-        backgroundColor: mainGreen,
+        backgroundColor: mainBlack,
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -57,8 +82,8 @@ class _TrainerProfileState extends State<TrainerProfile> {
                         width: 100,
                         height: 100,
                         decoration: BoxDecoration(
-                          color: mainGreen,
-                          border: Border.all(color: mainGreen),
+                          color: mainBlack,
+                          border: Border.all(color: mainBlack),
                           borderRadius: const BorderRadius.all(
                               const Radius.circular(100)),
                         ),
@@ -88,7 +113,7 @@ class _TrainerProfileState extends State<TrainerProfile> {
                   height: 70,
                   margin: EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    color: mainGreen,
+                    color: mainBlack,
                     border: Border.all(color: Colors.black),
                     borderRadius:
                         const BorderRadius.all(const Radius.circular(15)),
@@ -130,16 +155,26 @@ class _TrainerProfileState extends State<TrainerProfile> {
                 margin: EdgeInsets.only(top: 10),
                 child: Column(
                   children: <Widget>[
-                    Text(
-                      rating == 0.0
-                          ? "Ainda não ocorreu nenhuma avaliação"
-                          : "Avaliação(Média): " + rating.toString(),
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    Container(
+                      child: _ratings.length == 0
+                          ? Text(
+                              "Ainda não ocorreu nenhuma avaliação",
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            )
+                          : GestureDetector(
+                              onTap: () => _goToRatingsListPage(),
+                              child: Text(
+                                "Avaliação(Média): " +
+                                    _ratings.length.toString(),
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold),
+                              ),
+                            ),
                     ),
                     SmoothStarRating(
                         starCount: 5,
-                        rating: rating,
+                        rating: 0.0,
                         // isReadOnly: true,
                         size: 40.0,
                         defaultIconData: Icons.star_border,
@@ -150,18 +185,6 @@ class _TrainerProfileState extends State<TrainerProfile> {
                   ],
                 ),
               ),
-              rating == 0.0
-                  ? Text('')
-                  : Container(
-                      margin: EdgeInsets.all(10),
-                      child: FlatButton(
-                          color: mainGreen,
-                          textColor: Colors.white,
-                          padding: EdgeInsets.all(10.0),
-                          onPressed: () {},
-                          child: Text("Ver Avaliações",
-                              style: TextStyle(fontSize: 20.0))),
-                    ),
               Container(
                 margin: EdgeInsets.all(5),
                 child: Row(
@@ -182,11 +205,11 @@ class _TrainerProfileState extends State<TrainerProfile> {
                       ),
                     ),
                     RaisedButton(
-                      color: Colors.transparent,
-                      onPressed: () => null,
+                      color: Colors.yellow[200],
+                      onPressed: () => _goToRatingsListPage(),
                       splashColor: Colors.blueGrey,
                       child: Text(
-                        'Mensagem',
+                        'Ver Avaliações',
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 20,
@@ -209,7 +232,7 @@ class _TrainerProfileState extends State<TrainerProfile> {
         margin: EdgeInsets.all(10),
         padding: EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: mainGreen,
+          color: mainBlack,
           border: Border.all(color: Colors.black),
           borderRadius: const BorderRadius.all(const Radius.circular(15)),
         ),

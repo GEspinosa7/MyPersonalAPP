@@ -1,50 +1,75 @@
-import 'package:MyPersonal/models/trainer_model.dart';
+import 'package:MyPersonal/models/training_model.dart';
 import 'package:MyPersonal/utils/colors.dart';
 import 'package:flutter/material.dart';
 
-class TrainerCard extends StatelessWidget {
-  final TrainerModel trainer;
+class ExerciseCard extends StatelessWidget {
+  final Exercise exercise;
   final Function() clickCard;
 
-  const TrainerCard({Key key, this.trainer, this.clickCard}) : super(key: key);
+  const ExerciseCard({Key key, this.exercise, this.clickCard})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: clickCard,
       child: Container(
-        margin: EdgeInsets.fromLTRB(10, 20, 10, 5),
-        padding: EdgeInsets.fromLTRB(20, 20, 40, 20),
-        height: 120,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: mainBlack,
-          border: Border.all(color: Colors.white),
-          borderRadius: const BorderRadius.all(const Radius.circular(30)),
-        ),
-        child:
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-          Container(
-              width: 80,
-              height: 80,
-              decoration: BoxDecoration(
-                color: mainBlack,
-                border: Border.all(color: mainGreen),
-                borderRadius:
-                    const BorderRadius.all(const Radius.circular(100)),
+          margin: EdgeInsets.all(5),
+          padding: EdgeInsets.all(10),
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: mainBlack,
+            border: Border.all(color: Colors.white),
+            borderRadius: const BorderRadius.all(const Radius.circular(10)),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Flexible(
+                child: Column(
+                  children: <Widget>[
+                    Text(
+                      'Nome',
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                    ),
+                    Text('Séries',
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold)),
+                    Text('Repetições',
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold)),
+                    Text('Descrição',
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold)),
+                    Text('Equipamento',
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold)),
+                  ],
+                ),
               ),
-              child: Center(child: Icon(Icons.person)
-                  // ClipRRect(
-                  //   borderRadius: const BorderRadius.all(const Radius.circular(100)),
-                  //   child: Image.asset('assets/img/indice.jpeg', width: 80, height: 80)
-                  // )
-                  )),
-          Text(
-            trainer.name + ' ' + trainer.lastname,
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          )
-        ]),
-      ),
+              Column(
+                children: <Widget>[
+                  Text(
+                    exercise.name,
+                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                  ),
+                  Text(exercise.series.toString(),
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                  Text(exercise.times.toString(),
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                  Text(exercise.description,
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                  Text('Halter',
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                ],
+              )
+            ],
+          )),
     );
     // return GestureDetector(
     //   onTap: clickCard,
