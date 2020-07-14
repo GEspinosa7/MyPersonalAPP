@@ -54,14 +54,14 @@ class _MyProfileState extends State<MyProfile> {
               title: Text('Meu Perfil', textAlign: TextAlign.center),
               centerTitle: true,
               backgroundColor: mainBlack,
-              actions: [
-                IconButton(
-                  icon: Icon(Icons.edit),
-                  onPressed: () {
-                    // Navigator.pop(context);
-                  },
-                )
-              ],
+              // actions: [
+              //   IconButton(
+              //     icon: Icon(Icons.edit),
+              //     onPressed: () {
+              //       // Navigator.pop(context);
+              //     },
+              //   )
+              // ],
             ),
             body: SingleChildScrollView(
               child: Column(
@@ -83,12 +83,11 @@ class _MyProfileState extends State<MyProfile> {
                               borderRadius: const BorderRadius.all(
                                   const Radius.circular(100)),
                             ),
-                            child: Center(child: Icon(Icons.add_a_photo)
-                                // ClipRRect(
-                                //   borderRadius: const BorderRadius.all(const Radius.circular(100)),
-                                //   child: Image.asset('assets/img/indice.jpeg', width: 100, height: 100)
-                                // )
-                                )),
+                            child: ClipRRect(
+                                borderRadius: const BorderRadius.all(
+                                    const Radius.circular(100)),
+                                child: Image.asset('assets/img/me_fake.jpg',
+                                    width: 100, height: 100))),
                         Text(
                           clientProfile.name + " " + clientProfile.lastname,
                           style: TextStyle(
@@ -99,7 +98,7 @@ class _MyProfileState extends State<MyProfile> {
                   ),
                   Divider(),
                   Text(
-                    'Dados Físicos',
+                    'Dados',
                     style: TextStyle(
                         fontSize: 18,
                         color: Colors.white,
@@ -122,19 +121,19 @@ class _MyProfileState extends State<MyProfile> {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: <Widget>[
                               Text(
-                                'Tempo de Ativo',
+                                'Tempo Ativo',
                                 style: TextStyle(
                                     fontSize: 18,
                                     color: mainBlack,
                                     fontWeight: FontWeight.bold),
                               ),
-                              Text(
-                                'Idade',
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    color: mainBlack,
-                                    fontWeight: FontWeight.bold),
-                              ),
+                              // Text(
+                              //   'Idade',
+                              //   style: TextStyle(
+                              //       fontSize: 18,
+                              //       color: mainBlack,
+                              //       fontWeight: FontWeight.bold),
+                              // ),
                               Text(
                                 'Peso',
                                 style: TextStyle(
@@ -161,13 +160,13 @@ class _MyProfileState extends State<MyProfile> {
                                     color: mainBlack,
                                     fontWeight: FontWeight.bold),
                               ),
-                              Text(
-                                clientProfile.birthDate.toString(),
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    color: mainBlack,
-                                    fontWeight: FontWeight.bold),
-                              ),
+                              // Text(
+                              //   clientProfile.birthDate.toString(),
+                              //   style: TextStyle(
+                              //       fontSize: 18,
+                              //       color: mainBlack,
+                              //       fontWeight: FontWeight.bold),
+                              // ),
                               Text(
                                 clientProfile.weight.toString(),
                                 style: TextStyle(
@@ -227,7 +226,7 @@ class _MyProfileState extends State<MyProfile> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             Text(
-              'Data de Início',
+              'Data de Início de contrato',
               style: TextStyle(
                   fontSize: 18, color: mainBlack, fontWeight: FontWeight.bold),
             ),
@@ -236,11 +235,11 @@ class _MyProfileState extends State<MyProfile> {
               style: TextStyle(
                   fontSize: 18, color: mainBlack, fontWeight: FontWeight.bold),
             ),
-            Text(
-              'Tempo Contratado',
-              style: TextStyle(
-                  fontSize: 18, color: mainBlack, fontWeight: FontWeight.bold),
-            ),
+            // Text(
+            //   'Tempo Contratado',
+            //   style: TextStyle(
+            //       fontSize: 18, color: mainBlack, fontWeight: FontWeight.bold),
+            // ),
           ],
         ),
         Column(
@@ -256,11 +255,11 @@ class _MyProfileState extends State<MyProfile> {
               style: TextStyle(
                   fontSize: 18, color: mainBlack, fontWeight: FontWeight.bold),
             ),
-            Text(
-              'Tempo Contratado',
-              style: TextStyle(
-                  fontSize: 18, color: mainBlack, fontWeight: FontWeight.bold),
-            ),
+            // Text(
+            //   'Tempo Contratado',
+            //   style: TextStyle(
+            //       fontSize: 18, color: mainBlack, fontWeight: FontWeight.bold),
+            // ),
           ],
         )
       ],

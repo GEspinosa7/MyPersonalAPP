@@ -23,8 +23,8 @@ class _ClientListPageState extends State<ClientListPage> {
   @override
   void initState() {
     super.initState();
-    _auth.currentUser().then((user) {
-      _loadTrainerProfile();
+    _auth.currentUser().then((user) async {
+      await _loadTrainerProfile();
       _loadClients();
     });
   }
@@ -38,7 +38,7 @@ class _ClientListPageState extends State<ClientListPage> {
   }
 
   _loadClients() async {
-    final list = await service.getClients();
+    final list = await service.getClients(trainerProfile.uid);
     setState(() {
       _clients = list;
     });
@@ -60,8 +60,8 @@ class _ClientListPageState extends State<ClientListPage> {
             centerTitle: true,
             backgroundColor: mainGreen),
         backgroundColor: mainBlack,
-        body: _clients == null
-            ? Text('Não há clientes')
+        body: _clients.length == 0
+            ? noClients()
             : Container(
                 child: ListView(
                   children: _clients.map((c) {
@@ -72,5 +72,34 @@ class _ClientListPageState extends State<ClientListPage> {
                   }).toList(),
                 ),
               ));
+  }
+
+  Widget noClients() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Icon(
+            Icons.announcement,
+            size: 90,
+          ),
+          Container(
+            margin: EdgeInsets.all(20),
+            height: 200,
+            decoration: BoxDecoration(
+              color: mainBlack,
+              border: Border.all(color: mainGreen),
+              borderRadius: const BorderRadius.all(const Radius.circular(15)),
+            ),
+            child: Center(
+                child: Text(
+              'Você ainda não tem nenhum cliente',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+            )),
+          ),
+        ],
+      ),
+    );
   }
 }

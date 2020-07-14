@@ -11,22 +11,40 @@ class ClientModel {
   String createdAt;
   String updatedAt;
   String uid;
+  int age;
 
+  // int get calculateAge {
+  //   DateTime currentDate = DateTime.now();
+  //   int age = currentDate.year - this.birthDate.year;
+  //   int month1 = currentDate.month;
+  //   int month2 = birthDate.month;
+  //   if (month2 > month1) {
+  //     age--;
+  //   } else if (month1 == month2) {
+  //     int day1 = currentDate.day;
+  //     int day2 = birthDate.day;
+  //     if (day2 > day1) {
+  //       age--;
+  //     }
+  //   }
+  //   this.age = age;
+  //   return this.age;
+  // }
 
-
-  ClientModel(
-      {this.id,
-      this.name,
-      this.lastname,
-      this.birthDate,
-      this.weight,
-      this.height,
-      this.goal,
-      this.timeActive,
-      this.availability,
-      this.createdAt,
-      this.updatedAt,
-      this.uid});
+  ClientModel({
+    this.id,
+    this.name,
+    this.lastname,
+    this.birthDate,
+    this.weight,
+    this.height,
+    this.goal,
+    this.timeActive,
+    this.availability,
+    this.createdAt,
+    this.updatedAt,
+    this.uid,
+  });
 
   ClientModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -41,7 +59,6 @@ class ClientModel {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     uid = json['uid'];
-
 
     // DateTime.parse(birthDate);
   }

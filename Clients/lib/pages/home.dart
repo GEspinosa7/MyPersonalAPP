@@ -92,12 +92,11 @@ class _HomePageState extends State<HomePage> {
                                   borderRadius: const BorderRadius.all(
                                       const Radius.circular(100)),
                                 ),
-                                child: Center(child: Icon(Icons.add_a_photo)
-                                    // ClipRRect(
-                                    //   borderRadius: const BorderRadius.all(const Radius.circular(100)),
-                                    //   child: Image.asset('assets/img/indice.jpeg', width: 100, height: 100)
-                                    // )
-                                    )),
+                                child: ClipRRect(
+                                    borderRadius: const BorderRadius.all(
+                                        const Radius.circular(100)),
+                                    child: Image.asset('assets/img/me_fake.jpg',
+                                        width: 100, height: 100))),
                           ),
                           Text(
                             clientProfile.name + " " + clientProfile.lastname,
@@ -108,6 +107,7 @@ class _HomePageState extends State<HomePage> {
                   ListTile(
                     title: Text('Meu Perfil'),
                     onTap: () {
+                      print(clientProfile.id);
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
                         return MyProfile();

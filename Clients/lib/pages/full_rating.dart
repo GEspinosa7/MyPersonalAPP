@@ -71,16 +71,6 @@ class _FullRatingPageState extends State<FullRatingPage> {
                       ],
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.only(top: 10),
-                    child: Text(
-                      'Toque para ver o perfil completo',
-                      style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
                 ],
               ),
             ),

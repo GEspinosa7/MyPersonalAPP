@@ -29,16 +29,15 @@ class ClientCard extends StatelessWidget {
               height: 80,
               decoration: BoxDecoration(
                 color: mainBlack,
-                border: Border.all(color: mainGreen),
+                border: Border.all(color: mainBlack),
                 borderRadius:
                     const BorderRadius.all(const Radius.circular(100)),
               ),
-              child: Center(child: Icon(Icons.person)
-                  // ClipRRect(
-                  //   borderRadius: const BorderRadius.all(const Radius.circular(100)),
-                  //   child: Image.asset('assets/img/indice.jpeg', width: 80, height: 80)
-                  // )
-                  )),
+              child: ClipRRect(
+                  borderRadius:
+                      const BorderRadius.all(const Radius.circular(100)),
+                  child: Image.asset('assets/img/perfil_fake.jpg',
+                      width: 90, height: 90))),
           Text(
             client.name + ' ' + client.lastname,
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),

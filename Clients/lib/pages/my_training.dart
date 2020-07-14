@@ -140,17 +140,17 @@ class _MyTrainingState extends State<MyTraining> {
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 17),
                       ),
-                      Text(
-                        'Duração',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 17),
-                      ),
-                      Text(
-                        training.dateEnd.toString(),
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 17),
-                      ),
+                      // Text(
+                      //   'Duração',
+                      //   textAlign: TextAlign.center,
+                      //   style: TextStyle(
+                      //       fontWeight: FontWeight.bold, fontSize: 17),
+                      // ),
+                      // Text(
+                      //   training.dateEnd.toString(),
+                      //   textAlign: TextAlign.center,
+                      //   style: TextStyle(fontSize: 17),
+                      // ),
                     ],
                   ),
                   Container(
@@ -196,6 +196,18 @@ class _MyTrainingState extends State<MyTraining> {
                   ),
                 ),
                 Divider(),
+                // RaisedButton(
+                //   color: Colors.blue,
+                //   onPressed: () => print(training.exercises.length),
+                //   splashColor: Colors.blueGrey,
+                //   child: Text(
+                //     'OK',
+                //     style: TextStyle(
+                //       color: Colors.white,
+                //       fontSize: 16,
+                //     ),
+                //   ),
+                // ),
                 Container(
                   height: 300,
                   padding: EdgeInsets.all(10),

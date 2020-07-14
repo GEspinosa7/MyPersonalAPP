@@ -39,12 +39,11 @@ class RatingCard extends StatelessWidget {
                             borderRadius: const BorderRadius.all(
                                 const Radius.circular(100)),
                           ),
-                          child: Center(child: Icon(Icons.person)
-                              // ClipRRect(
-                              //   borderRadius: const BorderRadius.all(const Radius.circular(100)),
-                              //   child: Image.asset('assets/img/indice.jpeg', width: 85, height: 85)
-                              // )
-                              )),
+                          child: ClipRRect(
+                              borderRadius: const BorderRadius.all(
+                                  const Radius.circular(100)),
+                              child: Image.asset('assets/img/perfil_fake.jpg',
+                                  width: 85, height: 85))),
                       Text(
                         rating.client.name + ' ' + rating.client.lastname,
                         style: TextStyle(fontSize: 18),

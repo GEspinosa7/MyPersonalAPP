@@ -22,13 +22,13 @@ class _FullRatingPageState extends State<FullRatingPage> {
 
   final _auth = FirebaseAuth.instance;
 
-  _goToClientProfile(ClientModel client) {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-      return MyClientProfile(
-        client: client,
-      );
-    }));
-  }
+  // _goToClientProfile(ClientModel client) {
+  //   Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+  //     return MyClientProfile(
+  //       client: client,
+  //     );
+  //   }));
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -45,62 +45,46 @@ class _FullRatingPageState extends State<FullRatingPage> {
             Container(
               width: double.infinity,
               margin: EdgeInsets.all(20),
-              child: GestureDetector(
-                onTap: () {
-                  _goToClientProfile(widget.rating.client);
-                },
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      padding: EdgeInsets.all(15),
-                      decoration: BoxDecoration(
-                        color: mainBlack,
-                        border: Border.all(color: mainBlack),
-                        borderRadius:
-                            const BorderRadius.all(const Radius.circular(100)),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: <Widget>[
-                          Container(
-                              width: 90,
-                              height: 90,
-                              decoration: BoxDecoration(
-                                color: mainBlack,
-                                border: Border.all(color: Colors.white),
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.all(15),
+                    decoration: BoxDecoration(
+                      color: mainBlack,
+                      border: Border.all(color: mainBlack),
+                      borderRadius:
+                          const BorderRadius.all(const Radius.circular(100)),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        Container(
+                            width: 90,
+                            height: 90,
+                            decoration: BoxDecoration(
+                              color: mainBlack,
+                              border: Border.all(color: Colors.white),
+                              borderRadius: const BorderRadius.all(
+                                  const Radius.circular(100)),
+                            ),
+                            child: ClipRRect(
                                 borderRadius: const BorderRadius.all(
                                     const Radius.circular(100)),
-                              ),
-                              child: Center(child: Icon(Icons.person)
-                                  // ClipRRect(
-                                  //   borderRadius: const BorderRadius.all(const Radius.circular(100)),
-                                  //   child: Image.asset('assets/img/indice.jpeg', width: 90, height: 90)
-                                  // )
-                                  )),
-                          Text(
-                            widget.rating.client.name +
-                                ' ' +
-                                widget.rating.client.lastname,
-                            style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
+                                child: Image.asset('assets/img/perfil_fake.jpg',
+                                    width: 90, height: 90))),
+                        Text(
+                          widget.rating.client.name +
+                              ' ' +
+                              widget.rating.client.lastname,
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
                     ),
-                    Container(
-                      margin: EdgeInsets.only(top: 10),
-                      child: Text(
-                        'Toque para ver o perfil completo',
-                        style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
             Container(

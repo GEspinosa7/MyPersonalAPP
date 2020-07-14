@@ -234,7 +234,10 @@ class _TrainingCreatorState extends State<TrainingCreator> {
                 ),
                 Padding(padding: EdgeInsets.all(8)),
                 RaisedButton(
-                  onPressed: _saveTraining,
+                  onPressed: () {
+                    Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) => HomePage()));
+                  },
                   color: mainBlack,
                   splashColor: mainGreen,
                   padding: EdgeInsets.all(10),
@@ -243,6 +246,16 @@ class _TrainingCreatorState extends State<TrainingCreator> {
                     style: TextStyle(fontSize: 20),
                   ),
                 ),
+                // RaisedButton(
+                //   onPressed: _saveTraining,
+                //   color: mainBlack,
+                //   splashColor: mainGreen,
+                //   padding: EdgeInsets.all(10),
+                //   child: Text(
+                //     'Enviar Treino',
+                //     style: TextStyle(fontSize: 20),
+                //   ),
+                // ),
               ],
             ),
           ),
@@ -342,6 +355,7 @@ class _TrainingCreatorState extends State<TrainingCreator> {
       _form.currentState.save();
       try {
         final training = await _trainingService.createTraining(_training);
+        print(_training.exercises.length);
         print(training.id);
         print("Treinador:");
         print(training.trainerId);

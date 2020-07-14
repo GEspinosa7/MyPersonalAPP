@@ -61,8 +61,7 @@ class _TrainerProfileState extends State<TrainerProfile> {
     return Scaffold(
       backgroundColor: mainGreen,
       appBar: AppBar(
-        title: Text('${widget.trainer.name} ${widget.trainer.lastname}',
-            textAlign: TextAlign.center),
+        title: Text('Personal Trainer', textAlign: TextAlign.center),
         centerTitle: true,
         backgroundColor: mainBlack,
       ),
@@ -87,14 +86,13 @@ class _TrainerProfileState extends State<TrainerProfile> {
                           borderRadius: const BorderRadius.all(
                               const Radius.circular(100)),
                         ),
-                        child: Center(child: Icon(Icons.person)
-                            // ClipRRect(
-                            //   borderRadius: const BorderRadius.all(const Radius.circular(100)),
-                            //   child: Image.asset('assets/img/indice.jpeg', width: 100, height: 100)
-                            // )
-                            )),
+                        child: ClipRRect(
+                            borderRadius: const BorderRadius.all(
+                                const Radius.circular(100)),
+                            child: Image.asset('assets/img/perfil_fake.jpg',
+                                width: 100, height: 100))),
                     Text(
-                      '${widget.trainer.birthDate}',
+                      '${widget.trainer.name} ${widget.trainer.lastname}',
                       style: TextStyle(
                           fontSize: 18,
                           color: Colors.white,
@@ -172,52 +170,67 @@ class _TrainerProfileState extends State<TrainerProfile> {
                               ),
                             ),
                     ),
-                    SmoothStarRating(
-                        starCount: 5,
-                        rating: 0.0,
-                        // isReadOnly: true,
-                        size: 40.0,
-                        defaultIconData: Icons.star_border,
-                        filledIconData: Icons.star,
-                        color: Colors.yellow[200],
-                        borderColor: Colors.yellow[200],
-                        spacing: 2.0)
+                    // SmoothStarRating(
+                    //     starCount: 5,
+                    //     rating: 0.0,
+                    //     // isReadOnly: true,
+                    //     size: 40.0,
+                    //     defaultIconData: Icons.star_border,
+                    //     filledIconData: Icons.star,
+                    //     color: Colors.yellow[200],
+                    //     borderColor: Colors.yellow[200],
+                    //     spacing: 2.0)
                   ],
                 ),
               ),
               Container(
                 margin: EdgeInsets.all(5),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                    RaisedButton(
-                      color: Colors.blue,
-                      onPressed: () {
-                        _goToContractingPage();
-                      },
-                      splashColor: Colors.blueGrey,
-                      child: Text(
-                        'Contratar',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
+                child: _ratings.length == 0
+                    ? RaisedButton(
+                        color: Colors.blue,
+                        onPressed: () {
+                          _goToContractingPage();
+                        },
+                        splashColor: Colors.blueGrey,
+                        child: Text(
+                          'Contratar',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                          ),
                         ),
+                      )
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: <Widget>[
+                          RaisedButton(
+                            color: Colors.blue,
+                            onPressed: () {
+                              _goToContractingPage();
+                            },
+                            splashColor: Colors.blueGrey,
+                            child: Text(
+                              'Contratar',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                              ),
+                            ),
+                          ),
+                          RaisedButton(
+                            color: Colors.yellow[200],
+                            onPressed: () => _goToRatingsListPage(),
+                            splashColor: Colors.blueGrey,
+                            child: Text(
+                              'Ver Avaliações',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 20,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                    RaisedButton(
-                      color: Colors.yellow[200],
-                      onPressed: () => _goToRatingsListPage(),
-                      splashColor: Colors.blueGrey,
-                      child: Text(
-                        'Ver Avaliações',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 20,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
               ),
             ],
           ),

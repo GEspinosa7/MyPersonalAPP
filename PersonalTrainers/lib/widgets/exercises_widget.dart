@@ -23,89 +23,93 @@ class ExerciseWidget extends StatelessWidget {
             icon: Icon(Icons.remove_circle_outline, color: Colors.redAccent),
             onPressed: () => onRemove(exercise),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Column(
-                children: <Widget>[
-                  Text(
-                    'Nome',
-                    style: TextStyle(
-                      color: mainBlack,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
+          Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Flexible(
+                  child: Column(
+                    children: <Widget>[
+                      Text(
+                        'Nome',
+                        style: TextStyle(
+                          color: mainBlack,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      ),
+                      Text(
+                        'Descrição',
+                        style: TextStyle(
+                            color: mainBlack,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18),
+                      ),
+                      Text(
+                        'Repetições',
+                        style: TextStyle(
+                            color: mainBlack,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18),
+                      ),
+                      Text(
+                        'Séries',
+                        style: TextStyle(
+                            color: mainBlack,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18),
+                      ),
+                      Text(
+                        'Equipamento',
+                        style: TextStyle(
+                            color: mainBlack,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18),
+                      ),
+                    ],
+                  ),
+                ),
+                Column(
+                  children: <Widget>[
+                    Text(
+                      exercise.name.toString(),
+                      style: TextStyle(
+                          color: mainBlack,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18),
                     ),
-                  ),
-                  Text(
-                    'Descrição',
-                    style: TextStyle(
-                        color: mainBlack,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18),
-                  ),
-                  Text(
-                    'Repetições',
-                    style: TextStyle(
-                        color: mainBlack,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18),
-                  ),
-                  Text(
-                    'Séries',
-                    style: TextStyle(
-                        color: mainBlack,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18),
-                  ),
-                  Text(
-                    'Equipamento',
-                    style: TextStyle(
-                        color: mainBlack,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18),
-                  ),
-                ],
-              ),
-              Column(
-                children: <Widget>[
-                  Text(
-                    exercise.name.toString(),
-                    style: TextStyle(
-                        color: mainBlack,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18),
-                  ),
-                  Text(
-                    exercise.description.toString(),
-                    style: TextStyle(
-                        color: mainBlack,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18),
-                  ),
-                  Text(
-                    exercise.times.toString(),
-                    style: TextStyle(
-                        color: mainBlack,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18),
-                  ),
-                  Text(
-                    exercise.series.toString(),
-                    style: TextStyle(
-                        color: mainBlack,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18),
-                  ),
-                  Text(
-                    exercise.equipment.toString(),
-                    style: TextStyle(
-                        color: mainBlack,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18),
-                  ),
-                ],
-              ),
-            ],
+                    Text(
+                      exercise.description.toString(),
+                      style: TextStyle(
+                          color: mainBlack,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18),
+                    ),
+                    Text(
+                      exercise.times.toString(),
+                      style: TextStyle(
+                          color: mainBlack,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18),
+                    ),
+                    Text(
+                      exercise.series.toString(),
+                      style: TextStyle(
+                          color: mainBlack,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18),
+                    ),
+                    Text(
+                      exercise.equipment.toString(),
+                      style: TextStyle(
+                          color: mainBlack,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ],
       ),

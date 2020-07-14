@@ -70,12 +70,13 @@ class _MyTainerProfileState extends State<MyTainerProfile> {
                                 borderRadius: const BorderRadius.all(
                                     const Radius.circular(100)),
                               ),
-                              child: Center(child: Icon(Icons.person)
-                                  // ClipRRect(
-                                  //   borderRadius: const BorderRadius.all(const Radius.circular(100)),
-                                  //   child: Image.asset('assets/img/indice.jpeg', width: 100, height: 100)
-                                  // )
-                                  )),
+                              child: ClipRRect(
+                                  borderRadius: const BorderRadius.all(
+                                      const Radius.circular(100)),
+                                  child: Image.asset(
+                                      'assets/img/perfil_fake.jpg',
+                                      width: 100,
+                                      height: 100))),
                           Container(
                             margin: EdgeInsets.all(10),
                             child: Text(
@@ -140,13 +141,13 @@ class _MyTainerProfileState extends State<MyTainerProfile> {
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold),
                                       ),
-                                      Text(
-                                        'Tempo Contratado',
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold),
-                                      ),
+                                      // Text(
+                                      //   'Tempo Contratado',
+                                      //   style: TextStyle(
+                                      //       fontSize: 16,
+                                      //       color: Colors.white,
+                                      //       fontWeight: FontWeight.bold),
+                                      // ),
                                       // Text('Status da Mensalidade', style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold),),
                                     ],
                                   ),
@@ -162,10 +163,10 @@ class _MyTainerProfileState extends State<MyTainerProfile> {
                                         contract.closeDate.toString(),
                                         style: TextStyle(fontSize: 16),
                                       ),
-                                      Text(
-                                        "closeDate - today",
-                                        style: TextStyle(fontSize: 16),
-                                      ),
+                                      // Text(
+                                      //   "closeDate - today",
+                                      //   style: TextStyle(fontSize: 16),
+                                      // ),
                                       // Text("Pago ou Não", style: TextStyle(fontSize: 16),),
                                     ],
                                   )
@@ -205,6 +206,8 @@ class _MyTainerProfileState extends State<MyTainerProfile> {
                       child: RaisedButton(
                         color: Colors.yellow[200],
                         onPressed: () {
+                          print(contract.trainer.uid);
+                          print(contract.trainer.id);
                           _goToRatingArea();
                         },
                         splashColor: Colors.grey[50],

@@ -60,7 +60,7 @@ class ExerciseCard extends StatelessWidget {
                   Text(exercise.times.toString(),
                       style:
                           TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-                  Text(exercise.description,
+                  Text(exercise.description.toString(),
                       style:
                           TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
                   Text('Halter',

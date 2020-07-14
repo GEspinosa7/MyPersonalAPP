@@ -6,6 +6,8 @@ import 'package:MyPersonal/utils/colors.dart';
 import 'package:MyPersonal/utils/load_screen.dart';
 import 'package:flutter/material.dart';
 
+import 'full_rating.dart';
+
 class RatingsList extends StatefulWidget {
   final TrainerModel trainer;
 
@@ -32,6 +34,14 @@ class _RatingsListState extends State<RatingsList> {
     });
   }
 
+  _goToFullRating(RatingModel rating) {
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+      return FullRatingPage(
+        rating: rating,
+      );
+    }));
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -46,7 +56,7 @@ class _RatingsListState extends State<RatingsList> {
                   children: _ratings.map((r) {
                     return RatingCard(
                       rating: r,
-                      // clickCard: () => _goToFullRating(r),
+                      clickCard: () => _goToFullRating(r),
                     );
                   }).toList(),
                 ),

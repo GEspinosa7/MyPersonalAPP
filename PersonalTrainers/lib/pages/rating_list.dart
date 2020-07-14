@@ -60,8 +60,8 @@ class _RatingListPageState extends State<RatingListPage> {
             centerTitle: true,
             backgroundColor: mainGreen),
         backgroundColor: mainBlack,
-        body: _ratings == null
-            ? Text('Não há ratinges')
+        body: _ratings.length == 0
+            ? noRating()
             : Container(
                 child: ListView(
                   children: _ratings.map((r) {
@@ -72,5 +72,34 @@ class _RatingListPageState extends State<RatingListPage> {
                   }).toList(),
                 ),
               ));
+  }
+
+  Widget noRating() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Icon(
+            Icons.announcement,
+            size: 90,
+          ),
+          Container(
+            margin: EdgeInsets.all(20),
+            height: 200,
+            decoration: BoxDecoration(
+              color: mainBlack,
+              border: Border.all(color: mainGreen),
+              borderRadius: const BorderRadius.all(const Radius.circular(15)),
+            ),
+            child: Center(
+                child: Text(
+              'Você ainda não recebeu nenhuma avaliação',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+            )),
+          ),
+        ],
+      ),
+    );
   }
 }

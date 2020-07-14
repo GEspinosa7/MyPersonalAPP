@@ -12,8 +12,6 @@ class ClientModel {
   String updatedAt;
   String uid;
 
-
-
   ClientModel(
       {this.id,
       this.name,
@@ -41,7 +39,6 @@ class ClientModel {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     uid = json['uid'];
-
 
     // DateTime.parse(birthDate);
   }
